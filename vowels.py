@@ -7,4 +7,4 @@ for x in s:
     if x == 'a' or x == 'e' or x=='i'\
         or x=='o' or x=='u':
         count +=1
-print("Number of vowels: " , str(count))
+print("Number of vowels: " , count)
