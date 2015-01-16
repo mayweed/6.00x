@@ -1,12 +1,14 @@
 #!/usr/bin/python
 
 s= input('--> ')
-count=0
+count=len(s)
+num=0
 bobcount=0
 
-for x in s:
-    if s[count]=='b' and s[count+1]=='o' and s[count+2]=='b':
+for x in s[count]:
+    if s[num]=='b' and s[num+1]=='o' and s[num+2]=='b':
         bobcount += 1
         count +=1
     else:
         count +=1
+print("Number of bob:" + str(bobcount))
