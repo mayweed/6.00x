@@ -5,6 +5,7 @@ bobcount=0
 count=0
 
 for y in s[len(s)-1]:
+#use s[y] !!
     if y=='b':
         pass
         if y=='o':
