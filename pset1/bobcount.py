@@ -8,6 +8,7 @@ while count < (len(s) - 3):
     if s[count:3] == 'bob': 
         bobcount += 1
         count +=2
+        print(count)
     else:
         continue
         count +=1
