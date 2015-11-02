@@ -4,8 +4,8 @@ s= input('--> ')
 bobcount=0
 count=0
 
-while count < len(s):
-    if s[count:2] == 'bob': 
+while count < (len(s) - 3):
+    if s[count:3] == 'bob': 
         bobcount += 1
         count +=2
     else:
