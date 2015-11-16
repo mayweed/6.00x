@@ -62,11 +62,12 @@ def check_cardp_1(cardp_1,cardp_2):
         if cardp_2[0] != 'A' or cardp_2[0] != 'K'or cardp_2[0] != 'Q' or cardp_2[0] != 'J':
             return cardp_1
                                     
-    # Cas "habituel"
-    elif cardp_1[0] > cardp_2[0]
-        return cardp_1
-    elif cardp_1[0] < cardp_2[0]:
-        return cardp_2 
+    # Cas "habituel" 
+    if cardp_1[0] and cardp_2[0] not in ['A','K', 'Q','J','1']: 
+        if cardp_1[0] > cardp_2[0]
+            return cardp_1
+        else: #cardp_1[0] < cardp_2[0]:
+            return cardp_2 
 
 
 # GAME IMPLEMENTATION
