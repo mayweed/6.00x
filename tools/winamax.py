@@ -35,33 +35,52 @@ print(handp_1, handp_2)
 # égales ?
 def check_cardp_1(cardp_1,cardp_2):
     """ check card, returns the best one"""
+    #Player plays an ace
     if cardp_1[0] == 'A' and cardp_2[0] != 'A': 
         return cardp_1
-                       
     elif cardp_1[0] != 'A' and cardp_2[0] == 'A':
         return cardp_2
                         
-    #Player one plays a king
+    #Player plays a king
     elif cardp_1[0] == 'K' and cardp_2[0] != 'A':
         return cardp_1
-
     elif cardp_1 [0] == 'K' and cardp_2[0] == 'A':
         return cardp_2
                             
-    # Player 1 plays a Queen
+    elif cardp_2[0] == 'K' and (cardp_1 != 'A' or cardp_1 != 'K'):
+        return cardp_2 
+    
+    #Player plays a Queen
     elif cardp_1[0] == 'Q' and (cardp_2[0] != 'A' or cardp_2[0] != 'K'):
         return cardp_1
+
+    elif cardp_2[0] == 'Q' and (cardp_1[0] != 'A' or cardp_1[0] != 'K'):
+        return cardp_2
                             
-    # Player one plays a Jack
+    # Player plays a Jack
     elif cardp_1[0] == 'J':
         if cardp_2[0] != 'A' or cardp_2[0] != 'K'or cardp_2[0] != 'Q': 
             return cardp_1
-                            
+
+    elif cardp_2[0] == 'J':
+        if cardp_1 != 'A' or cardp_1[0] != 'K' or cardp_1[0] != 'Q':
+            return cardp_2
+
     # Reste le cas de 10
     elif cardp_1[0] == '1':
         if cardp_2[0] != 'A' or cardp_2[0] != 'K'or cardp_2[0] != 'Q' or cardp_2[0] != 'J':
             return cardp_1
-                                    
+
+    elif cardp_2[0] == '1':
+        if cardp_1[0] != 'A' or cardp_1[0] != 'K'or cardp_1[0] != 'Q' or cardp_1[0] != 'J':
+           return cardp_2
+
+    # if one is high and the other not
+    elif cardp_1[0] in ['A','K', 'Q','J','1'] and cardp_2[0] not in ['A','K', 'Q','J','1']:
+           return cardp_1
+    elif cardp_1[0] not in ['A','K', 'Q','J','1'] and cardp_2[0] in ['A','K', 'Q','J','1']:
+           return cardp_2
+                               
     # Cas "habituel" 
     if cardp_1[0] and cardp_2[0] not in ['A','K', 'Q','J','1']: 
         if cardp_1[0] > cardp_2[0]
