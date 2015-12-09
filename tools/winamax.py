@@ -3,6 +3,40 @@
 import sys
 import math
 
+# New version with a class!!
+class Card:
+#Tuples are immutable...matter is: high card!!
+#int of course
+values=(2, 3, 4, 5, 6, 7, 8, 9)
+high_values={'J':10,'Q':11,'K':12,'A':13}
+suits=('C','S','H','D')
+                
+def __init__(self,card):
+#Could hardcode index, always value+suit
+    self.index=len(card)
+    self.data=card
+             
+# SO WHY ITER?? Wasn't able to do it with __iter__
+def __getitem__(self,key):
+    #Apparently I need that method, __iter()__ is not enough
+    return self.data[key]
+                                    
+def get_value(self):
+    #Either low or high
+    v = self.data[0]
+    if v in self.values:
+        return self.data[0]
+    elif v in self.high_values.keys():
+        return self.high_values[v]
+
+#Testing purpose    
+def get_suit(self):
+    return str(self.data[1])
+
+# Let's write a class Hand that inherits from Card which allows
+# iteration + delitem and setitem method to update the hand
+# class Hand(Card):
+
 # Idea: read an input file directly from the command line
 # It works but '\n' should be squashed
 handp_1 = []
@@ -17,16 +51,21 @@ with open(sys.argv[1], 'r') as suite:
 
 print(handp_1, handp_2)
 
+# Could test
 #handp_1 = []
 #n = int(input())  # the number of cardp_2 for player 1
 #for i in range(n):
-#        cardp_1p_1 = input()  # the n cardp_2 of player 1
-#            handp_1.append(cardp_1p_1)
+#    cardp_1 = input()  # the n cardp_2 of player 1
+#    cp1=Card()
+# iter() is possible but it could get tricky quickly to access the list
+# item and then the item themselves. Classes classes ;)
+#    cp1=iter(cardp1)
+#    handp_1.append(cp1)
             
 #handp_2 = []
 #m = int(input())  # the number of cardp_2 for player 2
 #for i in range(m):
-#    cardp_1p_2 = input()  # the m cardp_2 of player 2
+#    cardp_2 = input()  # the m cardp_2 of player 2
 #    handp_2.append(cardp_1p_2)
                     
 # THE FIGHT
