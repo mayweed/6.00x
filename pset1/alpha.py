@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import sys
+
 s= input("--> ")
 """
 ALGO
@@ -22,4 +24,6 @@ for i in range(len(s)-1):
         end +=1
     if s[i] < s[i+1]:
         print(s[start:end])
-        start = i
+        print(start,end,file=sys.stderr)
+        #la fin devt le nouveau début
+        start = end
