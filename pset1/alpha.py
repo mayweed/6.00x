@@ -16,6 +16,8 @@ chunks=[]
 #String manip:
 #http://www.pythonforbeginners.com/basics/string-manipulation-in-python
 #http://pythoncentral.io/cutting-and-slicing-strings-in-python/
+# THE REF:
+# https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str
 #end is i
 for i in range(len(s)-1):
     start=0
