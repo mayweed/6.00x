@@ -19,6 +19,7 @@ chunks=[]
 # THE REF:
 # https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str
 #end is i
+#OTHER ALGO: calculate length and slice/append string letter to a list
 for i in range(len(s)-1):
     start=0
     if s[i] < s[i+1]:
