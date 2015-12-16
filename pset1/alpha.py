@@ -11,19 +11,15 @@ Retranslate it to a string?
 #a new list where append the new chunks
 chunks=[]
 
+#end not impacted inside the loop!!
+end=0
+
 for i in range(len(s)-1):
     start=0
-    end=0
     if s[i] > s[i+1]:
         end +=1
-    #    continue
     if s[i] == s[i+1]:
         end +=1
-     #   continue
     if s[i] < s[i+1]:
         print(s[start:end])
-        chunks.append(s[start:end])
-        start = i+1
-      #  break
-
-print(chunks)
+        start = i
