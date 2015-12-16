@@ -13,17 +13,19 @@ Retranslate it to a string?
 #a new list where append the new chunks
 chunks=[]
 
-#end not impacted inside the loop!!
 end=0
+start=0
 
 for i in range(len(s)-1):
-    start=0
     if s[i] > s[i+1]:
-        end +=1
-    elif s[i] == s[i+1]:
-        end +=1
-    elif s[i] < s[i+1]:
-        print(s[start:end])
-        print(start,end,file=sys.stderr)
+        #end +=1
+        continue
+    if s[i] == s[i+1]:
+        #end +=1
+        continue
+    if s[i] < s[i+1]:
+        print(s[start:i])
+        print(start,i,file=sys.stderr)
         #la fin devt le nouveau début
-        start = end
+        start = i
+
