@@ -20,8 +20,11 @@ chunks=[]
 # https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str
 #end is i
 #OTHER ALGO: calculate length and slice/append string letter to a list
-for i in range(len(s)-1):
-    start=0
+
+start=0
+i=0
+
+while i <= len(s):
     if s[i] < s[i+1]:
         continue
     if s[i] == s[i+1]:
@@ -32,3 +35,4 @@ for i in range(len(s)-1):
         print(start, i+1, file=sys.stderr)
         #la fin devt le nouveau début
         start = i+1
+    i +=1
