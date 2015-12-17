@@ -15,6 +15,7 @@ def somme(num):
     return somme
 
 
+# This code repeats itself need to find sth more terse
 summ=somme(n)
 
 #Should be a unique number
