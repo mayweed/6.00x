@@ -1,6 +1,25 @@
 #!/usr/bin/python
 
-#from a clash: write a prog that sum the number of a number
-# 12==1+2==3
-#19==1+9==10==1+0==1
-# divide by ten, recursive sum
+#from a codingame clash: write a prog that sum the number of a number
+# to add the numbers and keep n a str: sum(map(int,str(n))
+# if you want a int cast the RIGHT operand
+
+n = int(input("--> "))
+
+def somme(num):
+    somme=0
+    while num != 0:
+        somme += (num%10)
+        #in Py3 dont forget the second slash!!
+        num //= 10
+    return somme
+
+
+summ=somme(n)
+
+#Should be a unique number
+while summ >= 10:
+    summ += somme(summ)
+    summ //=10
+
+print(summ)
