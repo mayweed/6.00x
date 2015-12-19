@@ -8,6 +8,7 @@ Output:
 33
 3
 INTERESTING: learning print() formatting
+https://docs.python.org/3/library/functions.html#print
 """
 n=int(input("--> "))
 i=0
