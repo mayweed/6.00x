@@ -9,7 +9,7 @@ Output:
 3
 INTERESTING: learning print() formatting
 """
-n=int(input())
+n=int(input("--> "))
 i=0
 z=n
 
