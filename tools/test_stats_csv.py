@@ -4,6 +4,7 @@ import sys
 import csv
 import pandas as pd
 
+#useful link:https://www.kaggle.com/c/titanic/details/getting-started-with-python
 #Dont want to lose time typing and retyping.
 # Should use arg instead of file name in open()'STATS_PRETS_2008_2015.csv'
 # Should add csv.QUOTE_NONNUMERIC: cant convert string to float..,quoting=csv.QUOTE_NONNUMERIC)
