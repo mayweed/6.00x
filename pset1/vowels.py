@@ -7,7 +7,6 @@
 s = input('--> ')
 count=0
 for x in s:
-    if x == 'a' or x == 'e' or x=='i'\
-        or x=='o' or x=='u':
+    if x in ['a','e','i','o','u']:
         count +=1
 print("Number of vowels: " , count)
