@@ -13,20 +13,22 @@ count_items={}
 
 count=0
 y=0
-
 #pour chaque prev il faut parcourir toute la liste
-while y < len(items)-1:
+while y <= len(items)-1:
     prev=items[y]
-    for i in items[y:]:
-        print(i)
-        if i==prev:
+    print(prev)
+    for i in items:
+        if i in list(count_items.keys()):
+            # we already got it
+            continue
+        elif i==prev:
             #should we del() here?or slice??
             count +=1
-            count_items[i]=count
-        elif i != prev: #or items.index(i) == len(items)-1:
+            count_items[prev]=count
+        elif items[y] != prev: #or items.index(i) == len(items)-1:
             continue
         #when one i is unique? and (after..) not in items?
-        else:count=1;count_items[i]=count
+        else:count=1;count_items[prev]=count
     y+=1
 
 
