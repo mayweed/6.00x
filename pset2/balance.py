@@ -1,8 +1,12 @@
 #!/usr/bin/python
 
-balance=4842
-annualInterestRate=0.2
-monthlyPaymentRate=0.04
+"""
+Those values shouldn't be specified
+Here for test purposes only
+balance=3568
+annualInterestRate=0.18
+monthlyPaymentRate=0.05
+"""
 monthlyInterestRate=annualInterestRate/12.0
 paid=[]
 
@@ -25,5 +29,4 @@ for i in range(1,13):
         print("Remaining balance:",balanceAfterInterest(balance,monthlyInterestRate))
         print("Total paid:",round(sum(paid),2))
         print("Remaining balance:",balanceAfterInterest(balance,monthlyInterestRate))
-
     balance=balanceAfterInterest(balance,monthlyInterestRate)
