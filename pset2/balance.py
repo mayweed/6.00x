@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
 """
-Those values shouldn't be specified
+Those 3 values shouldn't be specified
 Here for test purposes only
+"""
 balance=3568
 annualInterestRate=0.18
 monthlyPaymentRate=0.05
-"""
+
 monthlyInterestRate=annualInterestRate/12.0
 paid=[]
 
