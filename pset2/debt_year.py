@@ -6,26 +6,19 @@ monthlyInterestRate=annualInterestRate/12.0
 
 #That's what I must guess(cf upper bound)
 #Should decrease that inside the loop
-monthlyPayment= (balance * (1 + monthlyInterestRate)12)/12 
-print(monthlyPayment)
-
-# to check i I've paid everything or not
-paid=[]
+monthlyPayment= round((balance * (1 + monthlyInterestRate))/12,2) 
+print(round(monthlyPayment,2))
 
 def balanceAfterInterest(balance,monthlyInterestRate):
-    unpaid_balance= balance - miniMonthlyPayment
+    unpaid_balance= balance - monthlyPayment
     interest=unpaid_balance + (monthlyInterestRate*unpaid_balance)
     return round(interest,2)
 
-
-while sum(paid)>0: #monthlyPayment * 10 > 0 
+#loop condition not good
+while monthlyPayment * 10 > 0:
     for i in range(1,11):
-        paid.append(monthlyPayment)
         print("Month:",i)
         print("Minimum Monthly Payment:",monthlyPayment)
         print("Remaining balance:",balanceAfterInterest(balance,monthlyInterestRate))
         balance=balanceAfterInterest(balance,monthlyInterestRate)
     monthlyPayment-=10
-
-
-
