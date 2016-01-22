@@ -3,7 +3,7 @@
 """
 Those 2 values for testing purposes only
 """
-balance=3101
+balance=999999
 annualInterestRate=0.18
 
 owed_sum=balance
