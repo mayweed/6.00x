@@ -43,6 +43,7 @@ if  < epsilon:
     monthlyPayment=mid
     x=calculate_balance(owed_sum,monthlyPayment)
     if x > epsilon:
+    # low=mid?
 
 
 print("Lowest payment: ",monthlyPayment)
