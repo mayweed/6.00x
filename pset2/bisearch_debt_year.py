@@ -39,7 +39,7 @@ remainingBalance=balance
 
 while abs(remainingBalance) >= epsilon :
     owed_sum=balance
-
+    monthlyPayment=lower_bound+(upper_bound-lower_bound)/2.0
     # use the function to store the balance at the end of the year
     remainingBalance=calculate_balance(owed_sum,monthlyPayment)
     
@@ -51,7 +51,10 @@ while abs(remainingBalance) >= epsilon :
     if remainingBalance > 0: 
         lower_bound=monthlyPayment
 
-    monthlyPayment=lower_bound+(upper_bound-lower_bound)/2.0
-    print("L/M/U:",lower_bound,monthlyPayment,upper_bound)
+    #Seems better to me to put monthlyPayment her (cf output) but
+    #it does not pass that way. I _have to_ put that assignment
+    # between owed_sum and remainingBalance to pass the test..
+    #monthlyPayment=lower_bound+(upper_bound-lower_bound)/2.0
+    #print("L/M/U:",lower_bound,monthlyPayment,upper_bound)
 
 print("Lowest payment: ",round(monthlyPayment,2))
