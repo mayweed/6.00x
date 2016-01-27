@@ -37,6 +37,7 @@ def calculate_balance(owed_sum,monthlyPayment):
 
 monthlyPayment=mid
 remainingBalance=calculate_balance(balance,mid)
+
 while remainingBalance < 0:
     owed_sum=balance
     if remainingBalance < 0: 
@@ -51,8 +52,6 @@ while remainingBalance < 0:
     monthlyPayment=mid
     print("L/M/H:",low,mid,high)
     remainingBalance=calculate_balance(owed_sum,monthlyPayment)
-
-
     print("Remaining Balance: ",remainingBalance)
 
 print("Lowest payment: ",monthlyPayment)
