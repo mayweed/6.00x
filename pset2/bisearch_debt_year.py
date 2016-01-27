@@ -11,6 +11,7 @@ owed_sum=balance
 monthlyInterestRate=annualInterestRate/12.0
 lower_bound=round((balance/12.0),2)
 upper_bound=round(balance *((1 + monthlyInterestRate)**12)/12.0,2)
+monthlyPayment=lower_bound+(upper_bound-lower_bound)/2.0
 
 # the delta named espilon(!) cf course
 epsilon=0.2
@@ -38,7 +39,6 @@ remainingBalance=balance
 
 while abs(remainingBalance) >= epsilon :
     owed_sum=balance
-    monthlyPayment=lower_bound+(upper_bound-lower_bound)/2.0
 
     # use the function to store the balance at the end of the year
     remainingBalance=calculate_balance(owed_sum,monthlyPayment)
@@ -50,5 +50,8 @@ while abs(remainingBalance) >= epsilon :
         
     if remainingBalance > 0: 
         lower_bound=monthlyPayment
+
+    monthlyPayment=lower_bound+(upper_bound-lower_bound)/2.0
+    print("L/M/U:",lower_bound,monthlyPayment,upper_bound)
 
 print("Lowest payment: ",round(monthlyPayment,2))
