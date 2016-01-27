@@ -7,13 +7,13 @@ Res=90325.03
 balance=999999
 annualInterestRate=0.18
 
-epsilon=0.2
 owed_sum=balance
 monthlyInterestRate=annualInterestRate/12.0
 lower_bound=round((balance/12.0),2)
 upper_bound=round(balance *((1 + monthlyInterestRate)**12)/12.0,2)
-mid=lower_bound+(upper_bound-lower_bound)/2.0
-monthlyPayment=mid
+
+# the delta named espilon(!) cf course
+epsilon=0.2
 
 def remaining_balance(owed_sum):
     """
@@ -33,13 +33,19 @@ def calculate_balance(owed_sum,monthlyPayment):
         owed_sum=x
     return owed_sum
 
+# At the beginning you owe everything
 remainingBalance=balance
+
 while abs(remainingBalance) >= epsilon :
     owed_sum=balance
     monthlyPayment=lower_bound+(upper_bound-lower_bound)/2.0
-    remainingBalance=calculate_balance(owed_sum,monthlyPayment)
 
+    # use the function to store the balance at the end of the year
+    remainingBalance=calculate_balance(owed_sum,monthlyPayment)
+    
+    #here only one upper or lower move (cf output!!)
     if remainingBalance < 0: 
+        #can and should pay more
         upper_bound=monthlyPayment
         
     if remainingBalance > 0: 
