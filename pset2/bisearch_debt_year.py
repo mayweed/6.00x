@@ -30,15 +30,18 @@ def calculate_balance(owed_sum,monthlyPayment):
         Yields the remaining balance after 12 months of payment
     """
     for i in range(1,13):
-        print("MonthlyPayment ",monthlyPayment)
+        #print("MonthlyPayment ",monthlyPayment)
         x= remaining_balance(owed_sum)
-        print("Month/remB ",i,x)
+        #print("Month/remB ",i,x)
         owed_sum=x
     return owed_sum
 
-remainingBalance=calculate_balance(balance,mid)
-while remainingBalance <= 0 :
+remainingBalance=balance
+while abs(remainingBalance) >= 0 :
     owed_sum=balance
+    remainingBalance=calculate_balance(owed_sum,monthlyPayment)
+    print("REMB:"remainingBalance)
+
     if remainingBalance < 0: 
         high=monthlyPayment
         low=lower_bound
@@ -49,7 +52,5 @@ while remainingBalance <= 0 :
 
     monthlyPayment=low+(high-low)/2.0
     print("L/M/H:",low,monthlyPayment,high)
-    remainingBalance=calculate_balance(owed_sum,monthlyPayment)
-    print("Remaining Balance: ",remainingBalance)
 
 #print("Lowest payment: ",round(monthlyPayment,2))
