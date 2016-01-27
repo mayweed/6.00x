@@ -7,13 +7,14 @@ Res=90325.03
 balance=999999
 annualInterestRate=0.18
 
+epsilon=0.2
 owed_sum=balance
 monthlyInterestRate=annualInterestRate/12.0
-
 lower_bound=round((balance/12.0),2)
 upper_bound=round(balance *((1 + monthlyInterestRate)**12)/12.0,2)
 mid=lower_bound+(upper_bound-lower_bound)/2.0
-epsilon=0.1
+monthlyPayment=mid
+epsilon=0.2
 
 def remaining_balance(owed_sum):
     """
@@ -35,23 +36,20 @@ def calculate_balance(owed_sum,monthlyPayment):
         owed_sum=x
     return owed_sum
 
-monthlyPayment=mid
 remainingBalance=calculate_balance(balance,mid)
-
-while remainingBalance < 0:
+while remainingBalance <= 0 :
     owed_sum=balance
     if remainingBalance < 0: 
-        high=mid
+        high=monthlyPayment
         low=lower_bound
         
-    elif remainingBalance > 0: 
+    if remainingBalance > 0: 
         high=upper_bound
-        low=mid
+        low=monthlyPayment
 
-    mid=low+(high-low)/2.0
-    monthlyPayment=mid
-    print("L/M/H:",low,mid,high)
+    monthlyPayment=low+(high-low)/2.0
+    print("L/M/H:",low,monthlyPayment,high)
     remainingBalance=calculate_balance(owed_sum,monthlyPayment)
     print("Remaining Balance: ",remainingBalance)
 
-print("Lowest payment: ",monthlyPayment)
+#print("Lowest payment: ",round(monthlyPayment,2))
