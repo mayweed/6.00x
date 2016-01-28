@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+s=input('--> A number please: ')
+
 def ndigits(number):
     """
         This function takes as input a number postive or negative and outputs the number of
@@ -8,3 +10,5 @@ def ndigits(number):
     count=1
     if abs(number//10) == 0:return 1
     else:return count+1*ndigits(abs(number//10))
+
+print(ndigits(int(s)))
