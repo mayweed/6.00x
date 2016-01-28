@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-#that one should make a recursive call
-n=10000
-
 def ndigits(number):
     """
         This function takes as input a number postive or negative and outputs the number of
