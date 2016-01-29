@@ -7,7 +7,7 @@ import math
 start=0
 stop=4
 step=0.25
-
+r=0
 
 def f(x):
     return 10*math.e**(math.log(0.5)/5.27 * x)
@@ -41,5 +41,3 @@ def radiationExposure(start, stop, step):
         start+=step
         print(start,rad)
     return rad
-
-radiationExposure(start, stop, step)
