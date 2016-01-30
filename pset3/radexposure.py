@@ -39,5 +39,5 @@ def radiationExposure(start, stop, step):
     while start < stop:
         rad+=rectangle_area(start,step) 
         start+=step
-        print(start,rad)
+ #       print(start,rad)
     return rad
