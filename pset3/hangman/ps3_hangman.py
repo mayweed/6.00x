@@ -75,8 +75,12 @@ def getAvailableLetters(lettersGuessed):
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE...
-    
+    letters=string.ascii_lowercase 
+    letters_bis=''
+    for i in letters:
+        if i in lettersGuessed:continue
+        else:letters_bis+=i
+    return letters_bis
 
 def hangman(secretWord):
     '''
