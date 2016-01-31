@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # 6.00 Problem Set 3
 # 
 # Hangman game
@@ -12,7 +14,7 @@
 import random
 import string
 
-#WORDLIST_FILENAME = "/home/guillaume/scripts/6.00x/pset3/hangman/words.txt"
+WORDLIST_FILENAME='/home/guillaume/scripts/6.00x/pset3/hangman/words.txt'
 
 def loadWords():
     """
@@ -22,12 +24,13 @@ def loadWords():
     take a while to finish.
     """
     print ("Loading word list from file...")
+
     # inFile: file
-    inFile = open("/home/guillaume/scripts/6.00x/pset3/hangman/words.txt", 'r', 0)
-    # line: string
-    line = inFile.readline()
+    with open(WORDLIST_FILENAME,'r',1) as inFile:
+        line = inFile.readline()
+
     # wordlist: list of strings
-    wordlist = string.split(line)
+    wordlist = line.split()
     print ("  ", len(wordlist), "words loaded.")
     return wordlist
 
