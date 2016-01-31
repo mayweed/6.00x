@@ -24,7 +24,7 @@ def loadWords():
 
     # wordlist: list of strings
     wordlist = line.split()
-    print ("  ", len(wordlist), "words loaded.")
+    print ("{0} words loaded.".format(len(wordlist))) 
     return wordlist
 
 def chooseWord(wordlist):
