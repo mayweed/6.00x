@@ -31,14 +31,17 @@ def loadWords():
     Depending on the size of the word list, this function may
     take a while to finish.
     """
-    print "Loading word list from file..."
-    # inFile: file
-    inFile = open(WORDLIST_FILENAME, 'r', 0)
+    print ("Loading word list from file...")
+
     # wordList: list of strings
     wordList = []
-    for line in inFile:
-        wordList.append(line.strip().lower())
-    print "  ", len(wordList), "words loaded."
+
+    # inFile: file
+    with open(WORDLIST_FILENAME, 'r') as inFile:
+        for line in inFile:
+            wordList.append(line.strip().lower())
+
+    print ("  ", len(wordList), "words loaded.")
     return wordList
 
 def getFrequencyDict(sequence):
@@ -99,7 +102,7 @@ def displayHand(hand):
     """
     for letter in hand.keys():
         for j in range(hand[letter]):
-             print letter,              # print all on the same line
+             print (letter,)              # print all on the same line
     print                               # print an empty line
 
 #
@@ -254,7 +257,7 @@ def playGame(wordList):
     2) When done playing the hand, repeat from step 1    
     """
     # TO DO ... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this line when you code the function
+    print ("playGame not yet implemented.") # <-- Remove this line when you code the function
    
 
 
