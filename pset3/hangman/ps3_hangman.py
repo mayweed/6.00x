@@ -66,7 +66,7 @@ def getGuessedWord(secretWord, lettersGuessed):
     secretword_bis=''
     for i in secretWord:
         if i in lettersGuessed: secretword_bis+=i
-        else: secretword_bis+='_'
+        else: secretword_bis+=' _ '
     return secretword_bis
 
 def getAvailableLetters(lettersGuessed):
@@ -102,16 +102,57 @@ def hangman(secretWord):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE...
 
+    print("Welcome to the game Hangman!")
+    print("I'm thinking about a word that is {0} letters long".format(len(secretWord)))
+    print("-----------")
 
+    #you always got 8 guesses. Why? Because...
+    guesses= 8
+    letters_guessed=[]
+    word=''
 
+    count_guess=guesses
+    count=0
+    #game loop
+    while count <= guesses:
+        print("You have {0} guesses left".format(count_guess))
+        print("Available Letters: {0}".format(getAvailableLetters(letters_guessed)))
+        user_guess=input("Please guess a letter: ")
 
+        if user_guess in string.ascii_uppercase: 
+            user_guess=user_guess.lower()
 
+        if user_guess in letters_guessed: 
+            print("Oops! You've already guessed that letter: {0}".format(getGuessedWord(secretWord,letters_guessed)))
+            print("-----------")
+            continue
+        if user_guess in secretWord:
+            letters_guessed.append(user_guess)
+            print("Good guess: {0}".format(getGuessedWord(secretWord,letters_guessed)))
+        if user_guess not in secretWord:
+            print("Oops! That letter is not in my word: {0}".format(getGuessedWord(secretWord,letters_guessed)))
+            count_guess -=1
+            count +=1 
+
+        if isWordGuessed(secretWord,letters_guessed): 
+            print("-----------")
+            print("Congratulations! You Won!")
+            break
+        if count_guess==0 and getGuessedWord(secretWord,letters_guessed) != secretWord:
+            print("-----------")
+            print("Sorry you ran out of guesses! The word was else")
+            break
+
+        print("-----------")
+        letters_guessed.append(user_guess)
+        #count shouldn't be updated when guesses is not
+        #count +=1
 
 # When you've completed your hangman function, uncomment these two lines
 # and run this file to test! (hint: you might want to pick your own
 # secretWord while you're testing)
 
-# secretWord = chooseWord(wordlist).lower()
-# hangman(secretWord)
+#secretWord = chooseWord(wordlist).lower()
+secretWord='sea'
+hangman(secretWord)
