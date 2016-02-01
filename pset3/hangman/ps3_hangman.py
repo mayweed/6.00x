@@ -146,13 +146,9 @@ def hangman(secretWord):
 
         print("-----------")
         letters_guessed.append(user_guess)
-        #count shouldn't be updated when guesses is not
-        #count +=1
 
 # When you've completed your hangman function, uncomment these two lines
 # and run this file to test! (hint: you might want to pick your own
 # secretWord while you're testing)
-
-#secretWord = chooseWord(wordlist).lower()
-secretWord='sea'
+secretWord = chooseWord(wordlist).lower()
 hangman(secretWord)
