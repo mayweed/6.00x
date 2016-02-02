@@ -81,8 +81,12 @@ def getWordScore(word, n):
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     returns: int >= 0
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    result=0
+    for letters in word:
+        result += SCRABBLE_LETTER_VALUES[letters]
 
+    # 50 pt bonus??
+    return result * len(word)
 
 
 #
