@@ -85,8 +85,11 @@ def getWordScore(word, n):
     for letters in word:
         result += SCRABBLE_LETTER_VALUES[letters]
 
-    # 50 pt bonus??
-    return result * len(word)
+    if len(word) != n:
+        return result * len(word)
+    #if you use all n-letters 50 bonus point
+    if len(word) ==n:
+        return (result * len(word)) + 50
 
 
 #
