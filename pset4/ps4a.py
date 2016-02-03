@@ -161,16 +161,13 @@ def updateHand(hand, word):
     """
     #Should _not modify the original hand
     hand_paste=hand.copy()
+
     for letter in word:
-        #is that loop really necessary?
-        for l in list(hand_paste.keys()):
-            if l == letter:
-                hand_paste[l]=hand_paste.get(l,0)-1
+        if letter in list(hand_paste.keys()):
+            hand_paste[letter]=hand_paste.get(letter,0)-1
+
     return hand_paste
     
-
-
-
 #
 # Problem #3: Test word validity
 #
