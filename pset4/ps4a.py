@@ -163,9 +163,9 @@ def updateHand(hand, word):
     hand_paste=hand
     for letter in word:
         #is that loop really necessary?
-        for l in list(hand.keys()):
+        for l in list(hand_paste.keys()):
             if l == letter:
-                hand_paste[l]=hand.get(l,0)-1
+                hand_paste[l]=hand_paste.get(l,0)-1
     return hand_paste
     
 
