@@ -159,7 +159,15 @@ def updateHand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    #Should _not modify the original hand
+    hand_paste=hand
+    for letter in word:
+        #is that loop really necessary?
+        for l in list(hand.keys()):
+            if l == letter:
+                hand_paste[l]=hand.get(l,0)-1
+    return hand_paste
+    
 
 
 
