@@ -160,7 +160,7 @@ def updateHand(hand, word):
     returns: dictionary (string -> int)
     """
     #Should _not modify the original hand
-    hand_paste=hand
+    hand_paste=hand.copy()
     for letter in word:
         #is that loop really necessary?
         for l in list(hand_paste.keys()):
