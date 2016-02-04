@@ -207,7 +207,6 @@ def isValidWord(word, hand, wordList):
 #
 # Problem #4: Playing a hand
 #
-
 def calculateHandlen(hand):
     """ 
     Returns the length (number of letters) in the current hand.
@@ -245,32 +244,38 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
       
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
-    
+    score = 0 
     # As long as there are still letters left in the hand:
+    for letters in hand:
     
         # Display the hand
+        print("Current hand: {0}".format(displayHand(hand)))
         
         # Ask user for input
+        user_word=input("Enter word, or a . to indicate that you are finished:")
+
         
         # If the input is a single period:
-        
+        if user_word == '.': 
             # End the game (break out of the loop)
-
+            break 
             
         # Otherwise (the input is not a single period):
-        
+        if user_word != '.': 
             # If the word is not valid:
-            
+            if not (isValidWord(user_word, hand,wordList)): 
                 # Reject invalid word (print a message followed by a blank line)
+                print("Invalid word, please try again.")
+                break
 
             # Otherwise (the word is valid):
+            if isValidWord(user_word,hand,wordList):
 
-                # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
-                
+           # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
+               print(user_word+ "earned", getWordScore(user_word,n),+ "points.") 
                 # Update the hand 
-                
+               updateHand(hand,user_word)     
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
 
