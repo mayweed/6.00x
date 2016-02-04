@@ -247,7 +247,7 @@ def playHand(hand, wordList, n):
     # Keep track of the total score
     score = 0 
     # As long as there are still letters left in the hand:
-    for letters in hand:
+    for letters in list(hand.keys()):
     
         # Display the hand
         print("Current hand: {0}".format(displayHand(hand)))
@@ -273,7 +273,7 @@ def playHand(hand, wordList, n):
             if isValidWord(user_word,hand,wordList):
 
            # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
-               print(user_word+ "earned", getWordScore(user_word,n),+ "points.") 
+               print(user_word,"earned",getWordScore(user_word,n),"points.") 
                 # Update the hand 
                updateHand(hand,user_word)     
 
@@ -300,11 +300,12 @@ def playGame(wordList):
     print ("playGame not yet implemented.") # <-- Remove this line when you code the function
    
 
-
+wordList = loadWords()
+playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, 7)
 
 #
 # Build data structures used for entire session and play game
 #
-if __name__ == '__main__':
-    wordList = loadWords()
-    playGame(wordList)
+#if __name__ == '__main__':
+#    wordList = loadWords()
+#    playGame(wordList)
