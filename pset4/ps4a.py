@@ -215,8 +215,12 @@ def calculateHandlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    # TO DO... <-- Remove this comment when you code this function
-
+    #You don't count the 0 letter
+    #you count twice a letter you got by two
+    count =0
+    for k in hand.keys():
+        if hand[k] != 0: count+=hand[k]
+    return count
 
 
 def playHand(hand, wordList, n):
