@@ -246,22 +246,23 @@ def playHand(hand, wordList, n):
     """
     # Keep track of the total score
     score = 0 
+    hand_paste=hand.copy()
     # As long as there are still letters left in the hand:
     #for letters in list(hand.keys()):
-    while calculateHandlen(hand) != 0:
-        print("Current hand: ",displayHand(hand))
+    while calculateHandlen(hand_paste) != 0:
+        print("Current hand: ",displayHand(hand_paste))
         user_word=input("Enter word, or a . to indicate that you are finished:")
         if user_word == '.': 
             break 
         if user_word != '.': 
-               if isValidWord(user_word,hand,wordList):
+               if isValidWord(user_word,hand_paste,wordList):
                    print(user_word,"earned",getWordScore(user_word,n),"points.") 
                else: 
                    print("Invalid word, please try again.")
                    break
 
         #!! the original hand is not modified!!
-        updateHand(hand,user_word)     
+        updateHand(hand_paste,user_word)     
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
 
