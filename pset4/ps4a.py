@@ -264,7 +264,7 @@ def playHand(hand, wordList, n):
 
         #!! the original hand is not modified!!
         hand_paste=updateHand(hand_paste,user_word)     
-
+        score+=getWordScore(user_word,n)
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
 
 
@@ -290,6 +290,8 @@ def playGame(wordList):
 
 wordList = loadWords()
 playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, 7)
+#playHand({'h':1, 'i':1, 'c':1, 'z':1, 'm':2, 'a':1}, wordList, 7)
+#playHand({'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}, wordList, 7)
 
 #
 # Build data structures used for entire session and play game
