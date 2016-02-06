@@ -260,12 +260,14 @@ def playHand(hand, wordList, n):
                    print(user_word,"earned",getWordScore(user_word,n),"points.") 
                else: 
                    print("Invalid word, please try again.")
-                   break
 
         #!! the original hand is not modified!!
         hand_paste=updateHand(hand_paste,user_word)     
         score+=getWordScore(user_word,n)
+
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
+    if user_word=='.': print("Good Bye! Total Score: ",score)
+    else: print("Run out of letters! Total Score: ",score)
 
 
 #
