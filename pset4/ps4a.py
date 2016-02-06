@@ -254,11 +254,12 @@ def playHand(hand, wordList, n):
         if user_word == '.': 
             break 
         if user_word != '.': 
-            if not (isValidWord(user_word, hand,wordList)): 
-                print("Invalid word, please try again.")
-                break
-            if isValidWord(user_word,hand,wordList):
-               print(user_word,"earned",getWordScore(user_word,n),"points.") 
+               if isValidWord(user_word,hand,wordList):
+                   print(user_word,"earned",getWordScore(user_word,n),"points.") 
+               else: 
+                   print("Invalid word, please try again.")
+                   break
+
         #!! the original hand is not modified!!
         updateHand(hand,user_word)     
 
