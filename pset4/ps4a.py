@@ -109,8 +109,8 @@ def displayHand(hand):
     """
     for letter in hand.keys():
         for j in range(hand[letter]):
-             print (letter,)              # print all on the same line
-    print                               # print an empty line
+             print (letter,end=' ')              # print all on the same line
+    print('')                               # print an empty line
 
 #
 # Problem #2: Make sure you understand how this function works and what it does!
@@ -250,7 +250,8 @@ def playHand(hand, wordList, n):
     # As long as there are still letters left in the hand:
     #for letters in list(hand.keys()):
     while calculateHandlen(hand_paste) != 0:
-        print("Current hand: ",displayHand(hand_paste))
+        print("Current hand: ",end='')
+        displayHand(hand_paste)
         user_word=input("Enter word, or a . to indicate that you are finished:")
         if user_word == '.': 
             break 
