@@ -263,7 +263,7 @@ def playHand(hand, wordList, n):
                    break
 
         #!! the original hand is not modified!!
-        updateHand(hand_paste,user_word)     
+        hand_paste=updateHand(hand_paste,user_word)     
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
 
