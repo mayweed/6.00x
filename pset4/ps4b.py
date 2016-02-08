@@ -67,8 +67,30 @@ def compPlayHand(hand, wordList, n):
     wordList: list (string)
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     """
-    # TO DO ... <-- Remove this comment when you code this function
-    
+    # Keep track of the total score
+    score = 0 
+    # As long as there are still letters left in the hand:
+    #for letters in list(hand.keys()):
+    while calculateHandlen(hand) != 0:
+        print("Current hand: ",end='')
+        displayHand(hand)
+        #cf chooseWord() from hangman!!what about random.choice() in here?
+        user_word=compChooseWord(hand,wordList,n)
+        if user_word == None: 
+            break 
+        if user_word != None: 
+               if isValidWord(user_word,hand,wordList):
+                  score+=getWordScore(user_word,n)
+                  hand=updateHand(hand,user_word)     
+                  print ("\"{0}\" earned {1} points.Total: {2} points.".format(user_word,getWordScore(user_word,n),score))
+               else: 
+                   print("Invalid word, please try again.")
+
+    # Game is over (user entered a '.' or ran out of letters), so tell user the total score
+    if user_word==None: 
+        print("Good Bye! Total Score: ",score)
+    else: 
+        print("Run out of letters! Total Score: ",score)
 #
 # Problem #8: Playing a game
 #
@@ -103,6 +125,7 @@ def playGame(wordList):
 #
 # Build data structures used for entire session and play game
 #
+# cf chapter 6.1.1 in PyTut to explain that
 if __name__ == '__main__':
     wordList = loadWords()
     playGame(wordList)

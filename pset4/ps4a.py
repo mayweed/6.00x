@@ -258,7 +258,7 @@ def playHand(hand, wordList, n):
                if isValidWord(user_word,hand,wordList):
                   score+=getWordScore(user_word,n)
                   hand=updateHand(hand,user_word)     
-                  print ("{0} earned {1} points.Total: {2} points.".format(user_word,getWordScore(user_word,n),score))
+                  print ("\"{0}\" earned {1} points.Total: {2} points.".format(user_word,getWordScore(user_word,n),score))
                else: 
                    print("Invalid word, please try again.")
 
