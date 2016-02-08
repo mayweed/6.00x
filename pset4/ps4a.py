@@ -128,7 +128,7 @@ def dealHand(n):
     returns: dictionary (string -> int)
     """
     hand={}
-    numVowels = n / 3
+    numVowels = int(n / 3)
     
     for i in range(numVowels):
         x = VOWELS[random.randrange(0,len(VOWELS))]
@@ -285,17 +285,28 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    action=input("Enter n to deal a new hand, r to replay the last hand, or e to end game: r
-    You have not played a hand yet. Please play a new hand first!")
-    if action =="n":
-        hand=dealHand(HAND_SIZE)
-        playHand(hand,wordList,HAND_SIZE)
-    if action="r":
+    last_hand={}
+
+    #game loop
+    while True:
+        action=input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ") 
+        if action =="n":
+            hand=dealHand(HAND_SIZE)
+            last_hand=hand
+            playHand(hand,wordList,HAND_SIZE)
+        if action=="r":
+            #try/except here?
+            playHand(last_hand,wordlist,HAND_SIZE)
+            if not last_hand:
+                print("You have not played a hand yet. Please play a new hand first!")
+        if action=="e":
+            break
+        else: print("Invalid Command")
 
     #print ("playGame not yet implemented.") # <-- Remove this line when you code the function
    
 
-wordList = loadWords()
+#wordList = loadWords()
 #playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, 7)
 #playHand({'h':1, 'i':1, 'c':1, 'z':1, 'm':2, 'a':1}, wordList, 7)
 #playHand({'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}, wordList, 7)
@@ -303,6 +314,6 @@ wordList = loadWords()
 #
 # Build data structures used for entire session and play game
 #
-#if __name__ == '__main__':
-#    wordList = loadWords()
-#    playGame(wordList)
+if __name__ == '__main__':
+    wordList = loadWords()
+    playGame(wordList)
