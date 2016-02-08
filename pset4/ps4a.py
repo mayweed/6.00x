@@ -302,10 +302,7 @@ def playGame(wordList):
                 print("You have not played a hand yet. Please play a new hand first!")
         if action=="e":
             break
-        else: print("Invalid Command")
-
-    #print ("playGame not yet implemented.") # <-- Remove this line when you code the function
-   
+        if action not in ["n","r","e"]: print("Invalid Command")
 
 #wordList = loadWords()
 #playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, 7)
