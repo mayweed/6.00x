@@ -25,24 +25,24 @@ def compChooseWord(hand, wordList, n):
 
     returns: string or None
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Create a new variable to store the maximum score seen so far (initially 0)
-
+    current_score=0
     # Create a new variable to store the best word seen so far (initially None)  
-
+    best_word=None
     # For each word in the wordList
-
+    for word in wordList:
         # If you can construct the word from your hand
         # (hint: you can use isValidWord, or - since you don't really need to test if the word is in the wordList - you can make a similar function that omits that test)
-
+        if isValidWord(word,hand,wordList):
             # Find out how much making that word is worth
-
+            word_score=getWordScore(word,n)
             # If the score for that word is higher than your best score
-
-                # Update your best score, and best word accordingly
-
+            if word_score > current_score:
+                current_score=word_score
+                best_word=word
 
     # return the best word you found.
+    return best_word
 
 
 #
@@ -98,14 +98,11 @@ def playGame(wordList):
     wordList: list (string)
     """
     # TO DO... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this when you code this function
+    print ("playGame not yet implemented.") # <-- Remove this when you code this function
 
-        
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     wordList = loadWords()
     playGame(wordList)
-
-
