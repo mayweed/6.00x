@@ -296,8 +296,9 @@ def playGame(wordList):
             playHand(hand,wordList,HAND_SIZE)
         if action=="r":
             #try/except here?
-            playHand(last_hand,wordlist,HAND_SIZE)
-            if not last_hand:
+            if last_hand:
+                playHand(last_hand,wordList,HAND_SIZE)
+            else:
                 print("You have not played a hand yet. Please play a new hand first!")
         if action=="e":
             break
