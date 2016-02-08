@@ -249,7 +249,7 @@ def playHand(hand, wordList, n):
     # As long as there are still letters left in the hand:
     #for letters in list(hand.keys()):
     while calculateHandlen(hand) != 0:
-        print("Current hand: ",end='')
+        print("Current hand: ",end=''),
         displayHand(hand)
         user_word=input("Enter word, or a . to indicate that you are finished:")
         if user_word == '.': 

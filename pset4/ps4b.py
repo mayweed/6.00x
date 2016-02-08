@@ -72,7 +72,7 @@ def compPlayHand(hand, wordList, n):
     # As long as there are still letters left in the hand:
     #for letters in list(hand.keys()):
     while calculateHandlen(hand) != 0:
-        print("Current hand: ",end='')
+        print("Current hand: ",end=''),
         displayHand(hand)
         #cf chooseWord() from hangman!!what about random.choice() in here?
         user_word=compChooseWord(hand,wordList,n)
