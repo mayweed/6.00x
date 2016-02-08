@@ -74,7 +74,6 @@ def compPlayHand(hand, wordList, n):
     while calculateHandlen(hand) != 0:
         print("Current hand: ",end=''),
         displayHand(hand)
-        #cf chooseWord() from hangman!!what about random.choice() in here?
         user_word=compChooseWord(hand,wordList,n)
         if user_word : 
                if isValidWord(user_word,hand,wordList):
@@ -87,6 +86,7 @@ def compPlayHand(hand, wordList, n):
             break
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
+    # I do think we could prevent such a repetition, but "le mieux est l'ennemi du bien"...
     if user_word==None: 
         print("Total Score: ",score)
     else: 
@@ -119,8 +119,38 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print ("playGame not yet implemented.") # <-- Remove this when you code this function
+    last_hand={}
+
+    #game loop
+    while True:
+        action=input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ") 
+        if action =="n":
+            hand=dealHand(HAND_SIZE)
+            last_hand=hand
+            user_choice=input("Enter u to have yourself play, c to have the computer play: ")
+            while user_choice not in ["u","c"]:
+                print "invalid command"
+                user_choice=raw_input("Enter u to have yourself play, c to have the computer play: ")
+                if user_choice in ["u","c"]:break    
+            if user_choice=="u":
+                playHand(hand,wordList,HAND_SIZE)
+            if user_choice=="c":
+                compPlayHand(hand, wordList,HAND_SIZE)
+
+        if action=="r":
+            if not last_hand:
+                print "You have not played a hand yet. Please play a new hand first!"
+            else:
+                user_choice=input("Enter u to have yourself play, c to have the computer play: ")
+                if last_hand and user_choice=="u":
+                    playHand(last_hand,wordList,HAND_SIZE)
+                if last_hand and user_choice=="c":
+                    compPlayHand(last_hand,wordList,HAND_SIZE)
+
+        if action=="e":
+            break
+
+        if action not in ["n","r","e"]: print("Invalid Command")
 
 #
 # Build data structures used for entire session and play game
