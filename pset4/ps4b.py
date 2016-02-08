@@ -76,21 +76,21 @@ def compPlayHand(hand, wordList, n):
         displayHand(hand)
         #cf chooseWord() from hangman!!what about random.choice() in here?
         user_word=compChooseWord(hand,wordList,n)
-        if user_word == None: 
-            break 
-        if user_word != None: 
+        if user_word : 
                if isValidWord(user_word,hand,wordList):
                   score+=getWordScore(user_word,n)
                   hand=updateHand(hand,user_word)     
                   print ("\"{0}\" earned {1} points.Total: {2} points.".format(user_word,getWordScore(user_word,n),score))
                else: 
                    print("Invalid word, please try again.")
+        else:
+            break
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
     if user_word==None: 
-        print("Good Bye! Total Score: ",score)
+        print("Total Score: ",score)
     else: 
-        print("Run out of letters! Total Score: ",score)
+        print("Total Score: ",score)
 #
 # Problem #8: Playing a game
 #
