@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # 6.00x Problem Set 6
 #
 # Part 1 - HAIL CAESAR!
@@ -17,10 +19,10 @@ def loadWords():
     Depending on the size of the word list, this function may
     take a while to finish.
     """
-    print "Loading word list from file..."
+    print ("Loading word list from file...")
     inFile = open(WORDLIST_FILENAME, 'r')
     wordList = inFile.read().split()
-    print "  ", len(wordList), "words loaded."
+    print ("  ", len(wordList), "words loaded.")
     return wordList
 
 def isWord(wordList, word):
