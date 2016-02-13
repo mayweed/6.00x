@@ -14,11 +14,13 @@ def flatten(aList):
     Returns a copy of aList, which is a flattened version of aList 
     '''
     liste=[]
-    count=0
-    while count < len(aList):
-        if type(aList[count])==list and type(aList[count+1]) != list:
-            liste=aList[count]+[aList[count+1]]
-        count+=1
-    print(liste)
 
-flatten([[1,2,3],'a'])
+    #base case: if there is no list in aList, just return aList
+
+    #else if there is a list, try to flatten it thanks to the recursive use of flatten()
+    #on a copy of a list..so: if an elt is _not_ a list, append to liste[] else flatten via +
+    #then repeate on aList - elt...
+
+test_mit=[[1,'a',['cat'],2],[[[3]],'dog'],4,5]
+first_test=[[1,2,3],'a']
+flatten(test_mit)
