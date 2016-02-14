@@ -16,6 +16,16 @@ def flatten(aList):
     liste=[]
 
     #base case: if there is no list in aList, just return aList
+    for i in aList:
+        if type(i)==list:
+            #if list in i flatten!!
+            liste+=flatten(i)
+        else:liste.append(i)
+    print(liste)
+    #if len(aList) <=1: return aList
+    #if list then check for list, stop condition: not list(append)
+    #should slice the list
+    #tant que y'a des objets liste il faut flatten..
 
     #else if there is a list, try to flatten it thanks to the recursive use of flatten()
     #on a copy of a list..so: if an elt is _not_ a list, append to liste[] else flatten via +
@@ -23,4 +33,5 @@ def flatten(aList):
 
 test_mit=[[1,'a',['cat'],2],[[[3]],'dog'],4,5]
 first_test=[[1,2,3],'a']
+test_bc=[1,2,3,['a','b']]
 flatten(test_mit)
