@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 def isPalindrome(s):
 
     def toChars(s):
@@ -15,3 +17,5 @@ def isPalindrome(s):
             return s[0] == s[-1] and isPal(s[1:-1])
 
     return isPal(toChars(s))
+
+print(isPalindrome('kayak'))
