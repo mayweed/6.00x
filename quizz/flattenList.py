@@ -2,14 +2,6 @@
 
 def flatten(aList):
     ''' 
-    >>> l=[[1, 2, 3], 'a']
-    >>> l=l[0]+l[1]
-    Traceback (most recent call last):
-    File "<stdin>", line 1, in <module>
-    TypeError: can only concatenate list (not "str") to list
-    >>> l=l[0]+[l[1]]
-    >>> l
-    [1, 2, 3, 'a']
     aList: a list 
     Returns a copy of aList, which is a flattened version of aList 
     '''
