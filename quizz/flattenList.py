@@ -23,11 +23,11 @@ def flatten(aList):
         if type(element)==list:
             for item in (element):
                 if type(item)==list:
-                    liste+=item
+                    liste+=flatten(item)
                 else:liste.append(item)
         else:liste.append(element)
 
-    return liste #+flatten(aList[1:])
+    return liste 
 
 test_mit=[[1,'a',['cat'],2],[[[3]],'dog'],4,5]
 first_test=[[1,2,3],'a']
