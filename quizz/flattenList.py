@@ -21,9 +21,10 @@ def flatten(aList):
 
     for element in aList:
         if type(element)==list:
-            for item in element:
+            for item in (element):
                 if type(item)==list:
-                    liste+=flatten(item)
+                    liste+=item
+                else:liste.append(item)
         else:liste.append(element)
 
     return liste #+flatten(aList[1:])
