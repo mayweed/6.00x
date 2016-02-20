@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import string
 
 ### DO NOT MODIFY THIS FUNCTION ###
@@ -18,7 +20,7 @@ def load_words(file_name):
     line = in_file.readline()
     # word_list: list of strings
     word_list = line.split()
-    print '  ', len(word_list), 'words loaded.'
+    print ('  ', len(word_list), 'words loaded.')
     in_file.close()
     return word_list
 
