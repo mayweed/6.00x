@@ -4,6 +4,7 @@ import string
 
 #am lazy cant write the 26 letters etc by hand
 #could reuse that: in a func + python -c?? Argv??
+#The last comma is not a problem...ouf...
 def mk_dict(L):
     '''
         Take an iterable
