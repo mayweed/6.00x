@@ -13,7 +13,7 @@ def load_words(file_name):
     Depending on the size of the word list, this function may
     take a while to finish.
     '''
-    print 'Loading word list from file...'
+    print ('Loading word list from file...')
     # inFile: file
     in_file = open(file_name, 'r', 0)
     # line: string
@@ -22,7 +22,7 @@ def load_words(file_name):
     word_list = line.split()
     print ('  ', len(word_list), 'words loaded.')
     in_file.close()
-    return word_list
+    return word_lis
 
 ### DO NOT MODIFY THIS FUNCTION ###
 def is_word(word_list, word):
@@ -211,10 +211,10 @@ class CiphertextMessage(Message):
 
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
-print 'Expected Output: jgnnq'
-print 'Actual Output:', plaintext.get_message_text_encrypted()
+print ('Expected Output: jgnnq')
+print ('Actual Output:', plaintext.get_message_text_encrypted())
     
 #Example test case (CiphertextMessage)
 ciphertext = CiphertextMessage('jgnnq')
-print 'Expected Output:', (24, 'hello')
-print 'Actual Output:', ciphertext.decrypt_message()
+print ('Expected Output:', (24, 'hello'))
+print ('Actual Output:', ciphertext.decrypt_message())
