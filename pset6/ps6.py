@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import string
+import random
 
 ### DO NOT MODIFY THIS FUNCTION ###
 def load_words(file_name):
@@ -15,7 +16,7 @@ def load_words(file_name):
     '''
     print ('Loading word list from file...')
     # inFile: file
-    with open(file_name, 'r', 0) as in_file : 
+    with open(file_name, 'r') as in_file : 
         # line: string
         line = in_file.readline()
         # word_list: list of strings
@@ -66,7 +67,8 @@ class Message(object):
 
         a Message object has two attributes:
             self.message_text (string, determined by input text)
-            self.valid_words (list, determined using helper function load_words
+            self.valid_words (list, determined using helper function
+            load_words)
         '''
         self.message_text = text
         self.valid_words = load_words(WORDLIST_FILENAME)
@@ -105,13 +107,22 @@ class Message(object):
         '''
         #cant use mk_dict in the IDE
         #one or two dicos??
-        dico_low={'a':0,'b':1,'c':2,'d':3,'e':4,'f':5,'g':6,'h':7,'i':8,'j':9,'k':10,'l':11,'m':12,'n':13,
-        'o':14,'p':15,'q':16,'r':17,'s':18,'t':19,'u':20,'v':21,'w':22,'x':23,'y':24,'z':25}
-        dico_upper={'A':0,'B':1,'C':2, 'D':3,'E':4,'F':5,'G':6,'H':7,'I':8,'J':9,'K':10,'L':11,'M':12,'N':13,
-        'O':14,'P':15,'Q':16,'R':17,'S':18,'T':19,'U':20,'V':21,'W':22,'X':23,'Y':24,'Z':25}
+        # no: use ord + shift mod 26?? cf wikipedia
+        minuscules=string.ascii_lowercase
+        maj=string.ascii_uppercase
+        dico={}
 
+        for i in range(len(minuscules)):
+        #c'est l'indice qui change ne pas oublier les () pour la précédence
+        #cf 6.16 language ref
+            dico[minuscules[i]]= minuscules[(i+shift)%26] 
         
-        print(dico_low['a'])
+        for i in range(len(maj)):
+        #c'est l'indice qui change ne pas oublier les () pour la précédence
+        #cf 6.16 language ref
+            dico[maj[i]]= maj[(i+shift)%26] 
+
+        return dico
 
     def apply_shift(self, shift):
         '''
@@ -125,7 +136,16 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+
+        mess_to_encrypt=self.message_text
+        dico=self.build_shift_dict(shift)
+        encrypted_mess=''
+        for letter in mess_to_encrypt:
+            if letter in string.ascii_lowercase or letter in string.ascii_uppercase:
+                encrypted_mess+=dico[letter]
+            #we do not crypt those
+            else:encrypted_mess+=letter
+        return encrypted_mess
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -217,7 +237,9 @@ class CiphertextMessage(Message):
         pass #delete this line and replace with your code here
 
 #TESTING
-Message.build_shift_dict(shift)
+word=Message("th!s is Problem Set 6?")
+print(word.apply_shift(3))
+
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
 print ('Expected Output: jgnnq')
