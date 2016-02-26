@@ -245,9 +245,13 @@ class CiphertextMessage(Message):
 
         if best_shift==26:
             #passes that way...
-            return(0,self.apply_shift(0))
+            return (0,self.apply_shift(0))
         else:
             return (best_shift,self.apply_shift(best_shift))
+
+def decrypt_story():
+    ciphertext=CiphertextMessage(get_story_string())
+    return (ciphertext.decrypt_message())
 
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
