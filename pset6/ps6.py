@@ -105,9 +105,7 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        #cant use mk_dict in the IDE
-        #one or two dicos??
-        # no: use ord + shift mod 26?? cf wikipedia
+        # no: use len + shift mod 26?? cf wikipedia
         minuscules=string.ascii_lowercase
         maj=string.ascii_uppercase
         dico={}
@@ -118,8 +116,6 @@ class Message(object):
             dico[minuscules[i]]= minuscules[(i+shift)%26] 
         
         for i in range(len(maj)):
-        #c'est l'indice qui change ne pas oublier les () pour la précédence
-        #cf 6.16 language ref
             dico[maj[i]]= maj[(i+shift)%26] 
 
         return dico
@@ -165,7 +161,11 @@ class PlaintextMessage(Message):
         Hint: consider using the parent class constructor so less 
         code is repeated
         '''
-        pass #delete this line and replace with your code here
+
+        Message.__init__(self,text)
+        self.shift=shift
+        self.encrypting_dict=self.build_shift_dict(self.shift)
+        self.message_text_encrypted=self.apply_shift(self.shift)
 
     def get_shift(self):
         '''
@@ -173,7 +173,7 @@ class PlaintextMessage(Message):
         
         Returns: self.shift
         '''
-        pass #delete this line and replace with your code here
+        return self.shift
 
     def get_encrypting_dict(self):
         '''
@@ -181,7 +181,7 @@ class PlaintextMessage(Message):
         
         Returns: a COPY of self.encrypting_dict
         '''
-        pass #delete this line and replace with your code here
+        return self.encrypting_dict.copy()
 
     def get_message_text_encrypted(self):
         '''
@@ -189,7 +189,7 @@ class PlaintextMessage(Message):
         
         Returns: self.message_text_encrypted
         '''
-        pass #delete this line and replace with your code here
+        return self.message_text_encrypted
 
     def change_shift(self, shift):
         '''
@@ -202,7 +202,9 @@ class PlaintextMessage(Message):
 
         Returns: nothing
         '''
-        pass #delete this line and replace with your code here
+        self.shift=shift
+        self.encrypting_dict=self.build_shift_dict(self.shift)
+        self.message_text_encrypted=self.apply_shift(self.shift)
 
 
 class CiphertextMessage(Message):
