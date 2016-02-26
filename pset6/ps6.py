@@ -242,7 +242,8 @@ class CiphertextMessage(Message):
             for word in decrypt_string.split(' '):
                 if is_word(self.get_valid_words(),word):
                     best_shift=alphabet-original_shift
-
+        
+        #cornercase:this is the correct shift(we go from 0 to 25 not from 1 to 26)
         if best_shift==26:
             #passes that way...
             return (0,self.apply_shift(0))
