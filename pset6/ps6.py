@@ -58,7 +58,6 @@ def get_story_string():
 WORDLIST_FILENAME = 'words.txt'
 
 class Message(object):
-    ### DO NOT MODIFY THIS METHOD ###
     def __init__(self, text):
         '''
         Initializes a Message object
@@ -73,7 +72,6 @@ class Message(object):
         self.message_text = text
         self.valid_words = load_words(WORDLIST_FILENAME)
 
-    ### DO NOT MODIFY THIS METHOD ###
     def get_message_text(self):
         '''
         Used to safely access self.message_text outside of the class
@@ -82,7 +80,6 @@ class Message(object):
         '''
         return self.message_text
 
-    ### DO NOT MODIFY THIS METHOD ###
     def get_valid_words(self):
         '''
         Used to safely access a copy of self.valid_words outside of the class
@@ -218,7 +215,7 @@ class CiphertextMessage(Message):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self,text)
 
     def decrypt_message(self):
         '''
@@ -236,11 +233,21 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        alphabet=26
+        original_shift=0
+        best_shift=0
 
-#TESTING
-word=Message("th!s is Problem Set 6?")
-print(word.apply_shift(3))
+        for original_shift in range(0,26):
+            decrypt_string=self.apply_shift(alphabet-original_shift)
+            for word in decrypt_string.split(' '):
+                if is_word(self.get_valid_words(),word):
+                    best_shift=alphabet-original_shift
+
+        if best_shift==26:
+            #passes that way...
+            return(0,self.apply_shift(0))
+        else:
+            return (best_shift,self.apply_shift(best_shift))
 
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
@@ -249,5 +256,12 @@ print ('Actual Output:', plaintext.get_message_text_encrypted())
     
 #Example test case (CiphertextMessage)
 ciphertext = CiphertextMessage('jgnnq')
-print ('Expected Output:', (24, 'hello'))
-print ('Actual Output:', ciphertext.decrypt_message())
+ciphertext_bis = CiphertextMessage('Xyxcoxco gybnc')
+ciphertext_ter = CiphertextMessage('cymsodi lkmugkbn wkbmr kvbokni \
+dylkmmy gsvn ckn kmmeco cred loddob kmmozd kxqvo wokd combod aekbbov \
+byzo cdbodmr xoon cywo mrsop zyfobdi crkuo wsxn vkeqr gbyxq pbyxd wynobx \
+go coon drsop zbyfsno uxyg pbkwo csxqvo povvyg')
+#print ('Expected Output:', (24, 'hello'))
+#print ('Actual Output:', ciphertext.decrypt_message())
+#print(ciphertext_bis.decrypt_message())
+print(ciphertext_ter.decrypt_message())
