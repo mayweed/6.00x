@@ -72,9 +72,11 @@ class MedicatedAllergicAdopter(AllergicAdopter):
     """
     A MedicatedAllergicAdopter is extremely allergic to a particular species
     However! They have a medicine of varying effectiveness, which will be given in a dictionary
-    To calculate the score for a specific adoption center, we want to find what is the most allergy-inducing species that the adoption center has for the particular MedicatedAllergicAdopter. 
-    To do this, first examine what species the AdoptionCenter has that the MedicatedAllergicAdopter is allergic to, then compare them to the medicine_effectiveness dictionary. 
-    Take the lowest medicine_effectiveness found for these species, and multiply that value by the Adopter's calculate score method.
+    To calculate the score for a specific adoption center, we want to find what is the most 
+    allergy-inducing species that the adoption center has for the particular MedicatedAllergicAdopter. 
+    To do this, first examine what species the AdoptionCenter has that the MedicatedAllergicAdopter is allergic to, 
+    then compare them to the medicine_effectiveness dictionary. Take the lowest medicine_effectiveness found for these species,
+     and multiply that value by the Adopter's calculate score method.
     """
     # Your Code Here, should contain an __init__ and a get_score method.
 
@@ -97,7 +99,8 @@ class SluggishAdopter(Adopter):
     
 def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     """
-    The method returns a list of an organized adoption_center such that the scores for each AdoptionCenter to the Adopter will be ordered from highest score to lowest score.
+    The method returns a list of an organized adoption_center such that the scores
+    for each AdoptionCenter to the Adopter will be ordered from highest score to lowest score.
     """
     # Your Code Here 
 
@@ -106,4 +109,3 @@ def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     The function returns a list of the top n scoring Adopters from list_of_adopters (in numerical order of score)
     """
     # Your Code Here 
-
