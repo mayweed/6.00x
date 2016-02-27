@@ -8,18 +8,33 @@ class AdoptionCenter:
     species stored, the location, and the name. It also has a method to adopt a pet.
     """
     def __init__(self, name, species_types, location):
-        # Your Code Here
+        self.name=name
+        self.species_types=species_types
+        # enforce float... and parse deeper location...
+        #also works that way but less deep (no access to x or y separately)
+        #self.location=(float(location[0]),float(location[1]))
+        self.x=float(location[0])
+        self.y=float(location[1])
+        self.location=(self.x,self.y)
     def get_number_of_species(self, animal):
-        # Your Code Here 
+        for k,v in self.species_types.items():
+            if k==animal:
+                return v
     def get_location(self):
-        # Your Code Here 
+        return self.location
     def get_species_count(self):
-        # Your Code Here 
+        #when it's zero should not appear...
+        copy_dico={}
+        for k,v in self.species_types.items():
+            if v != 0:
+                copy_dico[k]=v
+        return copy_dico
     def get_name(self):
-        # Your Code Here 
+        return self.name
     def adopt_pet(self, species):
-        # Your Code Here 
-
+        for k,v in self.species_types.items():
+            if species==k:
+                self.species_types[k]-=1
 
 class Adopter:
     """ 
