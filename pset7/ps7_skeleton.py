@@ -43,14 +43,21 @@ class Adopter:
     simply the number of species that the shelter has of that species.
     """
     def __init__(self, name, desired_species):
-        # Your Code Here 
+        self.name=name
+        self.desired_species=desired_species
     def get_name(self):
-        # Your Code Here 
+        return self.name
     def get_desired_species(self):
-        # Your Code Here 
+        return self.desired_species
     def get_score(self, adoption_center):
-        # Your Code Here 
-
+        #the species dico
+        species_dico= adoption_center.get_species_count()
+        # yep a float...
+        num_desired=0.0
+        for species in self.get_desired_species().split(' '):
+            if species in list(species_dico.keys()):
+                num_desired+=species_dico[species]
+        return num_desired
 
 
 class FlexibleAdopter(Adopter):
