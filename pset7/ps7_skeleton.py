@@ -67,7 +67,19 @@ class FlexibleAdopter(Adopter):
     considered_species is a list containing the other species the adopter will consider
     Their score should be 1x their desired species + .3x all of their desired species
     """
-    # Your Code Here, should contain an __init__ and a get_score method.
+    def __init__(self, name, desired_species, considered_species):
+        Adopter.__init__(self,name,desired_species)
+        self.considered_species=considered_species
+    def get_score(self,adoption_center):
+        #do not forget self in the call unless instance error
+        adopter_score=Adopter.get_score(self,adoption_center)
+        species_dico= adoption_center.get_species_count()
+        num_desired=0.0
+        #here it's a _list_ of strings (no split)
+        for considered_species in self.considered_species:
+            if considered_species in list(species_dico.keys()):
+                num_desired+=species_dico[considered_species]
+        return adopter_score + 0.3 * num_desired
 
 
 class FearfulAdopter(Adopter):
@@ -77,7 +89,21 @@ class FearfulAdopter(Adopter):
     be a bit more reluctant to go there due to the presence of the feared species.
     Their score should be 1x number of desired species - .3x the number of feared species
     """
-    # Your Code Here, should contain an __init__ and a get_score method.
+    def __init__(self, name, desired_species, feared_species):
+        Adopter.__init__(self,name,desired_species)
+        self.feared_species=feared_species
+    def get_score(self,adoption_center):
+        adopter_score=Adopter.get_score(self,adoption_center)
+        species_dico= adoption_center.get_species_count()
+        num_feared=0.0
+        #here it's a string
+        for feared_species in self.feared_species.split(' '):
+            if feared_species in species_dico:
+                num_feared+=species_dico[feared_species]
+        score= adopter_score - 0.3 * num_feared
+        #to pass one test case for that class only
+        if score < 0 : return 0.0
+        else: return score
 
 
 class AllergicAdopter(Adopter):
