@@ -141,13 +141,10 @@ class MedicatedAllergicAdopter(AllergicAdopter):
         self.medicine_effectiveness=medicine_effectiveness
     def get_score(self,adoption_center):
         min_seen=1.0
-        #we evaluate an adoption center!!
         species_dico= adoption_center.get_species_count()
-        # what the adoption center got for adoption?
         for aspecies in species_dico:
-            # is adopter allergic?
+            #should use boolean here
             if aspecies in self.allergic_species:
-                #check to be sure
                 if aspecies in self.medicine_effectiveness:
                     if self.medicine_effectiveness[aspecies] < min_seen:
                         min_seen=self.medicine_effectiveness[aspecies]
@@ -197,7 +194,13 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     The method returns a list of an organized adoption_center such that the scores
     for each AdoptionCenter to the Adopter will be ordered from highest score to lowest score.
     """
-    # Your Code Here 
+    # Check adopter class with isinstance()
+    if isinstance(adopter,FlexibleAdopter):
+        for ac in list_of_adoption_centers:
+           score=adopter.get_score(ac) 
+           print(ac.get_name(),adopter.get_name(),score)
+    # if True: for ac in list_of_adoption_centers:score=adopter.get_score(ac)    
+    # print ac.get_name, adopter.get_name(), adopter.get_score()
 
 def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     """
