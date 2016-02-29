@@ -113,7 +113,16 @@ class AllergicAdopter(Adopter):
     these animals, they will not go there.
     Score should be 0 if the center contains any of the animals, or 1x number of desired animals if not
     """
-    # Your Code Here, should contain an __init__ and a get_score method.
+    def __init__(self, name, desired_species, allergic_species):
+        Adopter.__init__(self,name,desired_species)
+        self.allergic_species=allergic_species
+    def get_score(self,adoption_center):
+        species_dico= adoption_center.get_species_count()
+        for aspecies in self.allergic_species:
+            if aspecies in species_dico:
+                return 0.0
+            else:
+                return Adopter.get_score(self,adoption_center)
 
 
 class MedicatedAllergicAdopter(AllergicAdopter):
@@ -127,6 +136,18 @@ class MedicatedAllergicAdopter(AllergicAdopter):
      and multiply that value by the Adopter's calculate score method.
     """
     # Your Code Here, should contain an __init__ and a get_score method.
+    def __init__(self,name,desired_species,allergic_species,medicine_effectiveness):
+        AllergicAdopter.__init__(self,name,desired_species,allergic_species)
+        self.medicine_effectiveness=medicine_effectiveness
+    def get_score(self,adoption_center):
+        min_seen=1.0
+        for aspecies in self.allergic_species:
+            if aspecies in self.medicine_effectiveness:
+                if self.medicine_effectiveness[aspecies]==0.0:
+                    return 0.0
+                elif self.medicine_effectiveness[aspecies] < min_seen:
+                    min_seen=self.medicine_effectiveness[aspecies]
+        return Adopter.get_score(self,adoption_center)*min_seen 
 
 
 class SluggishAdopter(Adopter):
@@ -157,3 +178,4 @@ def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     The function returns a list of the top n scoring Adopters from list_of_adopters (in numerical order of score)
     """
     # Your Code Here 
+
