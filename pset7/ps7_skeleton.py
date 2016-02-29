@@ -118,11 +118,14 @@ class AllergicAdopter(Adopter):
         self.allergic_species=allergic_species
     def get_score(self,adoption_center):
         species_dico= adoption_center.get_species_count()
+        score=0
         for aspecies in self.allergic_species:
             if aspecies in species_dico:
-                return 0.0
+               return 0.0 
+            #dont think it's needed the else here...
             else:
-                return Adopter.get_score(self,adoption_center)
+               continue
+        return Adopter.get_score(self,adoption_center)
 
 
 class MedicatedAllergicAdopter(AllergicAdopter):
@@ -143,10 +146,9 @@ class MedicatedAllergicAdopter(AllergicAdopter):
         min_seen=1.0
         for aspecies in self.allergic_species:
             if aspecies in self.medicine_effectiveness:
-                if self.medicine_effectiveness[aspecies]==0.0:
-                    return 0.0
-                elif self.medicine_effectiveness[aspecies] < min_seen:
+                if self.medicine_effectiveness[aspecies] < min_seen:
                     min_seen=self.medicine_effectiveness[aspecies]
+        print(min_seen)
         return Adopter.get_score(self,adoption_center)*min_seen 
 
 
