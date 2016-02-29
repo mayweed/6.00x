@@ -1,4 +1,5 @@
-import random as rand
+import random 
+import math
 import string
 
 class AdoptionCenter:
@@ -165,7 +166,26 @@ class SluggishAdopter(Adopter):
     elif distance < 5. return random between (.5, .7 times number of desired species
     else return random between (.1, .5) times number of desired species
     """
-    # Your Code Here, should contain an __init__ and a get_score method.
+    def __init__(self, name, desired_species, location):
+        Adopter.__init__(self,name,desired_species)
+        self.location=(float(location[0]),float(location[1]))
+
+    def get_linear_distance(self,to_location):
+        distance=math.sqrt(((to_location[0]-self.location[0])**2)+((to_location[1]-self.location[1])**2))
+        return distance
+
+    def get_score(self,adoption_center):
+        distance=self.get_linear_distance(adoption_center.get_location())
+        num=0
+        desired_species=self.desired_species.split(' ') 
+        for species in desired_species:
+        #+= DOES NOT WORK, YIELD NONETYPE WTF???
+            num+=adoption_center.get_number_of_species(species)
+        print(num)
+        if distance < 1: return 1*num
+        elif distance >= 1 and distance < 3:return random.uniform(.7,.9)*num
+        elif distance >= 3 and distance < 5:return random.uniform(.5,.7)*num
+        else: return random.uniform (.1,.5)*num
 
     
 def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
