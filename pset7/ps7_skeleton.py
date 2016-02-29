@@ -119,7 +119,6 @@ class AllergicAdopter(Adopter):
         self.allergic_species=allergic_species
     def get_score(self,adoption_center):
         species_dico= adoption_center.get_species_count()
-        score=0
         for aspecies in self.allergic_species:
             if aspecies in species_dico:
                return 0.0 
@@ -145,11 +144,16 @@ class MedicatedAllergicAdopter(AllergicAdopter):
         self.medicine_effectiveness=medicine_effectiveness
     def get_score(self,adoption_center):
         min_seen=1.0
-        for aspecies in self.allergic_species:
-            if aspecies in self.medicine_effectiveness:
-                if self.medicine_effectiveness[aspecies] < min_seen:
-                    min_seen=self.medicine_effectiveness[aspecies]
-        print(min_seen)
+        #we evaluate an adoption center!!
+        species_dico= adoption_center.get_species_count()
+        # what the adoption center got for adoption?
+        for aspecies in species_dico:
+            # is adopter allergic?
+            if aspecies in self.allergic_species:
+                #check to be sure
+                if aspecies in self.medicine_effectiveness:
+                    if self.medicine_effectiveness[aspecies] < min_seen:
+                        min_seen=self.medicine_effectiveness[aspecies]
         return Adopter.get_score(self,adoption_center)*min_seen 
 
 
@@ -180,7 +184,7 @@ class SluggishAdopter(Adopter):
         desired_species=self.desired_species.split(' ') 
         for species in desired_species:
         #+= DOES NOT WORK, YIELD NONETYPE WTF???
-            num+=adoption_center.get_number_of_species(species)
+            num=adoption_center.get_number_of_species(species)
         print(num)
         if distance < 1: return 1*num
         elif distance >= 1 and distance < 3:return random.uniform(.7,.9)*num
