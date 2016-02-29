@@ -122,9 +122,6 @@ class AllergicAdopter(Adopter):
         for aspecies in self.allergic_species:
             if aspecies in species_dico:
                return 0.0 
-            #dont think it's needed the else here...
-            else:
-               continue
         return Adopter.get_score(self,adoption_center)
 
 
@@ -180,12 +177,15 @@ class SluggishAdopter(Adopter):
 
     def get_score(self,adoption_center):
         distance=self.get_linear_distance(adoption_center.get_location())
+        species_dico= adoption_center.get_species_count()
         num=0
         desired_species=self.desired_species.split(' ') 
+        #Desired species: not the num of self.desired_species
+        # but the total count of desired species in an adoption center
+        # did not succeed in using get_number_of_species() method
         for species in desired_species:
-        #+= DOES NOT WORK, YIELD NONETYPE WTF???
-            num=adoption_center.get_number_of_species(species)
-        print(num)
+            num+=species_dico.get(species,0)
+
         if distance < 1: return 1*num
         elif distance >= 1 and distance < 3:return random.uniform(.7,.9)*num
         elif distance >= 3 and distance < 5:return random.uniform(.5,.7)*num
