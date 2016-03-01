@@ -1,6 +1,7 @@
 import random 
 import math
 import string
+import operator
 
 class AdoptionCenter:
     """
@@ -194,29 +195,51 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     """
     # Check adopter class with isinstance()
     if isinstance(adopter,FlexibleAdopter):
+        scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
-           print(ac.get_name(),adopter.get_name(),score)
+           #append a tuple with all the info for one AC
+           scoreboard.append((ac.get_name(),adopter.get_name(),score))
+        #It's either/or ;)
+        #scoreboard.sort(key=operator.itemgetter(2),reverse=True)
+        scoreboardb=sorted(scoreboard,key=operator.itemgetter(2),reverse=True)
+        print(scoreboardb)
 
     elif isinstance(adopter,FearfulAdopter):
+        scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
-           print(ac.get_name(),adopter.get_name(),score)
+           #append a tuple with all the info for one AC
+           scoreboard.append((ac.get_name(),adopter.get_name(),score))
+        scoreboard.sort(key=lambda adopter: adopter[2],reverse=True)
+        print(scoreboard)
 
     elif isinstance(adopter,AllergicAdopter):
+        scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
-           print(ac.get_name(),adopter.get_name(),score)
+           #append a tuple with all the info for one AC
+           scoreboard.append((ac.get_name(),adopter.get_name(),score))
+        scoreboard.sort(key = lambda adopter: adopter[2],reverse=True)
+        print(scoreboard)
 
     elif isinstance(adopter,MedicatedAllergicAdopter):
+        scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
-           print(ac.get_name(),adopter.get_name(),score)
+           #append a tuple with all the info for one AC
+           scoreboard.append((ac.get_name(),adopter.get_name(),score))
+        scoreboard.sort(key = lambda adopter: adopter[2],reverse=True)
+        print(scoreboard)
 
     elif isinstance(adopter,SluggishAdopter):
+        scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
-           print(ac.get_name(),adopter.get_name(),score)
+           #append a tuple with all the info for one AC
+           scoreboard.append((ac.get_name(),adopter.get_name(),score))
+        scoreboard.sort(key = lambda adopter: adopter[2],reverse=True)
+        print(scoreboard)
 
     # if True: for ac in list_of_adoption_centers:score=adopter.get_score(ac)    
     # print ac.get_name, adopter.get_name(), adopter.get_score()
