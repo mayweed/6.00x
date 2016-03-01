@@ -193,60 +193,45 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     The method returns a list of an organized adoption_center such that the scores
     for each AdoptionCenter to the Adopter will be ordered from highest score to lowest score.
     """
+    scoreboard=[]
+
     # Check adopter class with isinstance()
     if isinstance(adopter,FlexibleAdopter):
-        scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
            #append a tuple with all the info for one AC
            scoreboard.append((ac.get_name(),adopter.get_name(),score))
-        #It's either/or ;)
-        #scoreboard.sort(key=operator.itemgetter(2),reverse=True)
-        scoreboardb=sorted(scoreboard,key=operator.itemgetter(2),reverse=True)
-        print(scoreboardb)
 
     elif isinstance(adopter,FearfulAdopter):
-        scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
-           #append a tuple with all the info for one AC
            scoreboard.append((ac.get_name(),adopter.get_name(),score))
-        #see: sorted_li = sorted(li, key=lambda x: (-x[1], x[0])) where
-        #-x[1] reverse sort a number and x[0] sort words
-        #http://stackoverflow.com/questions/11450277/complex-sort-with-multiple-parameters
-        #Very nice!! does NOT apply reversee to adopter[0]!!
-        scoreboard.sort(key=lambda adopter:(-adopter[2],adopter[0]))#,reverse=True)
-        print(scoreboard)
 
     elif isinstance(adopter,AllergicAdopter):
-        scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
-           #append a tuple with all the info for one AC
            scoreboard.append((ac.get_name(),adopter.get_name(),score))
-        scoreboard.sort(key = lambda adopter: adopter[2],reverse=True)
-        print(scoreboard)
 
     elif isinstance(adopter,MedicatedAllergicAdopter):
-        scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
-           #append a tuple with all the info for one AC
            scoreboard.append((ac.get_name(),adopter.get_name(),score))
-        scoreboard.sort(key = lambda adopter: adopter[2],reverse=True)
-        print(scoreboard)
 
     elif isinstance(adopter,SluggishAdopter):
         scoreboard=[]
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
-           #append a tuple with all the info for one AC
            scoreboard.append((ac.get_name(),adopter.get_name(),score))
-        scoreboard.sort(key = lambda adopter: adopter[2],reverse=True)
-        print(scoreboard)
 
-    # if True: for ac in list_of_adoption_centers:score=adopter.get_score(ac)    
-    # print ac.get_name, adopter.get_name(), adopter.get_score()
+    #It's either/or; three solutions one sort ;)
+    #scoreboard.sort(key=operator.itemgetter(2),reverse=True)
+    #scoreboardb=sorted(scoreboard,key=operator.itemgetter(2),reverse=True)
+    #see: sorted_li = sorted(li, key=lambda x: (-x[1], x[0])) where
+    #-x[1] reverse sort a number and x[0] sort words
+    #http://stackoverflow.com/questions/11450277/complex-sort-with-multiple-parameters
+    #Very nice!! does NOT apply reverse to adopter[0]!!
+    scoreboard.sort(key=lambda adopter:(-adopter[2],adopter[0]))
+    print(scoreboard)
 
 def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     """
