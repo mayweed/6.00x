@@ -211,7 +211,11 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
            score=adopter.get_score(ac) 
            #append a tuple with all the info for one AC
            scoreboard.append((ac.get_name(),adopter.get_name(),score))
-        scoreboard.sort(key=lambda adopter: adopter[2],reverse=True)
+        #see: sorted_li = sorted(li, key=lambda x: (-x[1], x[0])) where
+        #-x[1] reverse sort a number and x[0] sort words
+        #http://stackoverflow.com/questions/11450277/complex-sort-with-multiple-parameters
+        #Very nice!! does NOT apply reversee to adopter[0]!!
+        scoreboard.sort(key=lambda adopter:(-adopter[2],adopter[0]))#,reverse=True)
         print(scoreboard)
 
     elif isinstance(adopter,AllergicAdopter):
