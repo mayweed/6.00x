@@ -143,11 +143,9 @@ class MedicatedAllergicAdopter(AllergicAdopter):
         min_seen=1.0
         species_dico= adoption_center.get_species_count()
         for aspecies in species_dico:
-            #should use boolean here
-            if aspecies in self.allergic_species:
-                if aspecies in self.medicine_effectiveness:
-                    if self.medicine_effectiveness[aspecies] < min_seen:
-                        min_seen=self.medicine_effectiveness[aspecies]
+            if aspecies in self.allergic_species and aspecies in self.medicine_effectiveness:
+                if self.medicine_effectiveness[aspecies] < min_seen:
+                    min_seen=self.medicine_effectiveness[aspecies]
         return Adopter.get_score(self,adoption_center)*min_seen 
 
 
@@ -199,6 +197,27 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
         for ac in list_of_adoption_centers:
            score=adopter.get_score(ac) 
            print(ac.get_name(),adopter.get_name(),score)
+
+    elif isinstance(adopter,FearfulAdopter):
+        for ac in list_of_adoption_centers:
+           score=adopter.get_score(ac) 
+           print(ac.get_name(),adopter.get_name(),score)
+
+    elif isinstance(adopter,AllergicAdopter):
+        for ac in list_of_adoption_centers:
+           score=adopter.get_score(ac) 
+           print(ac.get_name(),adopter.get_name(),score)
+
+    elif isinstance(adopter,MedicatedAllergicAdopter):
+        for ac in list_of_adoption_centers:
+           score=adopter.get_score(ac) 
+           print(ac.get_name(),adopter.get_name(),score)
+
+    elif isinstance(adopter,SluggishAdopter):
+        for ac in list_of_adoption_centers:
+           score=adopter.get_score(ac) 
+           print(ac.get_name(),adopter.get_name(),score)
+
     # if True: for ac in list_of_adoption_centers:score=adopter.get_score(ac)    
     # print ac.get_name, adopter.get_name(), adopter.get_score()
 

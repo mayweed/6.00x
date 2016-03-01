@@ -33,6 +33,6 @@ ac3 = AdoptionCenter("Place3", {"Horse": 25, "Dog": 9}, (-2,10))
 
 #3.1
 # how to test get_ordered_adoption_center_list
-get_ordered_adoption_center_list(adopter3, [ac,ac2,ac3]) #,ac4,ac5,ac6])
+get_ordered_adoption_center_list(adopter, [ac,ac2,ac3]) #,ac4,ac5,ac6])
 # you can print the name and score of each item in the list returned
 #print(isinstance(adopter,FearfulAdopter)) # ==> yield False!!
