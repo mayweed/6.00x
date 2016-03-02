@@ -245,16 +245,16 @@ def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
         if isinstance(adopter,FlexibleAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
-        elif isinstance(adopter,FearfulAdopter):
+        if isinstance(adopter,FearfulAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
-        elif isinstance(adopter,AllergicAdopter):
+        if isinstance(adopter,AllergicAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
-        elif isinstance(adopter,MedicatedAllergicAdopter):
+        if isinstance(adopter,MedicatedAllergicAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
-        elif isinstance(adopter,SluggishAdopter):
+        if isinstance(adopter,SluggishAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
 
