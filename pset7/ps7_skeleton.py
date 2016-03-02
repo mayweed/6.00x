@@ -195,42 +195,36 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     """
     scoreboard=[]
 
-    # Check adopter class with isinstance() and add info in a tuple
+    # Check adopter class with isinstance() and add object/score in a tuple
+    # oki...for grader should return a list of ac object on which it will call get_name()
     for ac in list_of_adoption_centers:
-        if isinstance(adopter,FlexibleAdopter):
+        if isinstance(adopter,Adopter):
+            score=adopter.get_score(ac) 
+            scoreboard.append((ac,score))
+        elif isinstance(adopter,FlexibleAdopter):
              score=adopter.get_score(ac) 
              scoreboard.append((ac,score))
-
         elif isinstance(adopter,FearfulAdopter):
             score=adopter.get_score(ac) 
             scoreboard.append((ac,score))
-
         elif isinstance(adopter,AllergicAdopter):
             score=adopter.get_score(ac) 
             scoreboard.append((ac,score))
-
         elif isinstance(adopter,MedicatedAllergicAdopter):
             score=adopter.get_score(ac) 
             scoreboard.append((ac,score))
-
         elif isinstance(adopter,SluggishAdopter):
             score=adopter.get_score(ac) 
             scoreboard.append((ac,score))
 
-    #It's either/or; three solutions one sort ;)
-    #scoreboard.sort(key=operator.itemgetter(2),reverse=True)
-    #scoreboardb=sorted(scoreboard,key=operator.itemgetter(2),reverse=True)
-    #see: sorted_li = sorted(li, key=lambda x: (-x[1], x[0])) where
-    #-x[1] reverse sort a number and x[0] sort words
-    #http://stackoverflow.com/questions/11450277/complex-sort-with-multiple-parameters
-    #Very nice!! does NOT apply reverse to adopter[0]!!
-    scoreboard.sort(key=lambda sortado:(-sortado[1],sortado[0].get_name()))
-    #return(lambda score: item[0] for item in scoreboard)
-    #oki...for grader should return a list of ac object on which it will call get_name()
+    #SORT: see http://stackoverflow.com/questions/11450277/complex-sort-with-multiple-parameters
+    scoreboard.sort(key=lambda sortado:(-item[1],item[0].get_name()))
+
+    # list of my ordered AdoptionCenter objects
     liste_ac=[]
     for item in scoreboard:
         liste_ac.append(item[0])
-    #print(liste_ac)
+    return liste_ac
     
 def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     """
@@ -238,6 +232,7 @@ def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     """
     scoreboard=[]
 
+    #check adopter and calculate score
     for adopter in list_of_adopters:
         if isinstance(adopter,Adopter):
                 score=adopter.get_score(adoption_center) 
@@ -258,9 +253,10 @@ def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
 
+    #sort first by score then by name
     scoreboard.sort(key=lambda item:(-item[1],item[0].get_name()))
-    #use exception to deal with that??
-    #Found that very ugly!!
+
+    # a list of n-ordered adopters objects
     liste_adopter=[]
     i=0
     if n > len(scoreboard):
@@ -272,5 +268,4 @@ def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
         while i<n:
             liste_adopter.append(scoreboard[i][0])
             i+=1
-    print(len(liste_adopter))
-    print(len(scoreboard))
+    return liste_adopter
