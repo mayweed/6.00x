@@ -230,7 +230,7 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     liste_ac=[]
     for item in scoreboard:
         liste_ac.append(item[0])
-    print(liste_ac)
+    #print(liste_ac)
     
 def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     """
@@ -242,29 +242,35 @@ def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
         if isinstance(adopter,Adopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
-        if isinstance(adopter,FlexibleAdopter):
+        elif isinstance(adopter,FlexibleAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
-        if isinstance(adopter,FearfulAdopter):
+        elif isinstance(adopter,FearfulAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
-        if isinstance(adopter,AllergicAdopter):
+        elif isinstance(adopter,AllergicAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
-        if isinstance(adopter,MedicatedAllergicAdopter):
+        elif isinstance(adopter,MedicatedAllergicAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
-        if isinstance(adopter,SluggishAdopter):
+        elif isinstance(adopter,SluggishAdopter):
                 score=adopter.get_score(adoption_center) 
                 scoreboard.append((adopter,score))
 
     scoreboard.sort(key=lambda item:(-item[1],item[0].get_name()))
-    
     #use exception to deal with that??
     #Found that very ugly!!
     liste_adopter=[]
     i=0
-    while i<n:
+    if n > len(scoreboard):
+        n=len(scoreboard)
+        while i<n:
             liste_adopter.append(scoreboard[i][0])
             i+=1
-    return liste_adopter
+    else:
+        while i<n:
+            liste_adopter.append(scoreboard[i][0])
+            i+=1
+    print(len(liste_adopter))
+    print(len(scoreboard))
