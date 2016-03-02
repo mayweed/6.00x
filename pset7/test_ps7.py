@@ -35,9 +35,9 @@ ac5 = AdoptionCenter("Place5", {"Cat": 45, "Lizard": 2}, (8,-2))
 ac6 = AdoptionCenter("Place6", {"Cat": 23, "Dog": 7, "Horse": 5}, (-10,10))
 #3.1
 # how to test get_ordered_adoption_center_list
-get_ordered_adoption_center_list(adopter4, [ac,ac2,ac3,ac4,ac5,ac6])
+#get_ordered_adoption_center_list(adopter4, [ac,ac2,ac3,ac4,ac5,ac6])
 # you can print the name and score of each item in the list returned
 #print(isinstance(adopter,FearfulAdopter)) # ==> yield False!!
 # how to test get_adopters_for_advertisement
-#get_adopters_for_advertisement(ac2, [adopter, adopter2, adopter3, adopter4, adopter5, adopter6], 10)
+get_adopters_for_advertisement(ac2, [adopter, adopter2, adopter3, adopter4, adopter5, adopter6], 10)
 # you can print the name and score of each item in the list returned

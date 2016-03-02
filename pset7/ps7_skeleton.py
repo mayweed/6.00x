@@ -196,31 +196,26 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     scoreboard=[]
 
     # Check adopter class with isinstance() and add info in a tuple
-    if isinstance(adopter,FlexibleAdopter):
-        for ac in list_of_adoption_centers:
-           score=adopter.get_score(ac) 
-           scoreboard.append((ac.get_name(),score))
+    for ac in list_of_adoption_centers:
+        if isinstance(adopter,FlexibleAdopter):
+             score=adopter.get_score(ac) 
+             scoreboard.append((ac,score))
 
-    elif isinstance(adopter,FearfulAdopter):
-        for ac in list_of_adoption_centers:
-           score=adopter.get_score(ac) 
-           scoreboard.append((ac.get_name(),score))
+        elif isinstance(adopter,FearfulAdopter):
+            score=adopter.get_score(ac) 
+            scoreboard.append((ac,score))
 
-    elif isinstance(adopter,AllergicAdopter):
-        for ac in list_of_adoption_centers:
-           score=adopter.get_score(ac) 
-           scoreboard.append((ac.get_name(),score))
+        elif isinstance(adopter,AllergicAdopter):
+            score=adopter.get_score(ac) 
+            scoreboard.append((ac,score))
 
-    elif isinstance(adopter,MedicatedAllergicAdopter):
-        for ac in list_of_adoption_centers:
-           score=adopter.get_score(ac) 
-           scoreboard.append((ac.get_name(),score))
+        elif isinstance(adopter,MedicatedAllergicAdopter):
+            score=adopter.get_score(ac) 
+            scoreboard.append((ac,score))
 
-    elif isinstance(adopter,SluggishAdopter):
-        scoreboard=[]
-        for ac in list_of_adoption_centers:
-           score=adopter.get_score(ac) 
-           scoreboard.append((ac.get_name(),score))
+        elif isinstance(adopter,SluggishAdopter):
+            score=adopter.get_score(ac) 
+            scoreboard.append((ac,score))
 
     #It's either/or; three solutions one sort ;)
     #scoreboard.sort(key=operator.itemgetter(2),reverse=True)
@@ -229,11 +224,14 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     #-x[1] reverse sort a number and x[0] sort words
     #http://stackoverflow.com/questions/11450277/complex-sort-with-multiple-parameters
     #Very nice!! does NOT apply reverse to adopter[0]!!
-    scoreboard.sort(key=lambda adopter:(-adopter[1],adopter[0]))
+    scoreboard.sort(key=lambda sortado:(-sortado[1],sortado[0].get_name()))
     #return(lambda score: item[0] for item in scoreboard)
+    #oki...for grader should return a list of ac object on which it will call get_name()
+    liste_ac=[]
     for item in scoreboard:
-        print (item[0])
-
+        liste_ac.append(item[0])
+    print(liste_ac)
+    
 def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     """
     The function returns a list of the top n scoring Adopters from list_of_adopters (in numerical order of score)
@@ -241,38 +239,32 @@ def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     scoreboard=[]
 
     for adopter in list_of_adopters:
+        if isinstance(adopter,Adopter):
+                score=adopter.get_score(adoption_center) 
+                scoreboard.append((adopter,score))
         if isinstance(adopter,FlexibleAdopter):
                 score=adopter.get_score(adoption_center) 
-                scoreboard.append((adopter.get_name(),adoption_center.get_name(),score))
-
+                scoreboard.append((adopter,score))
         elif isinstance(adopter,FearfulAdopter):
                 score=adopter.get_score(adoption_center) 
-                scoreboard.append((adopter.get_name(),adoption_center.get_name(),score))
-
+                scoreboard.append((adopter,score))
         elif isinstance(adopter,AllergicAdopter):
                 score=adopter.get_score(adoption_center) 
-                scoreboard.append((adopter.get_name(),adoption_center.get_name(),score))
-
+                scoreboard.append((adopter,score))
         elif isinstance(adopter,MedicatedAllergicAdopter):
                 score=adopter.get_score(adoption_center) 
-                scoreboard.append((adopter.get_name(),adoption_center.get_name(),score))
-
+                scoreboard.append((adopter,score))
         elif isinstance(adopter,SluggishAdopter):
                 score=adopter.get_score(adoption_center) 
-                scoreboard.append((adopter.get_name(),adoption_center.get_name(),score))
+                scoreboard.append((adopter,score))
 
-    scoreboard.sort(key=lambda adopter:(-adopter[2],adopter[0]))
+    scoreboard.sort(key=lambda item:(-item[1],item[0].get_name()))
     
     #use exception to deal with that??
     #Found that very ugly!!
-    if n > len(scoreboard):
-        n=len(scoreboard)
-        i=0
-        while i<n:
-            print(scoreboard[i])
+    liste_adopter=[]
+    i=0
+    while i<n:
+            liste_adopter.append(scoreboard[i][0])
             i+=1
-    else:
-        i=0
-        while i<n:
-            print(scoreboard[i])
-            i+=1
+    return liste_adopter
