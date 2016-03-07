@@ -13,7 +13,8 @@ while not guessed:
     #middle is a formula
     guess=(high+low)/2
     print("Is your secret number {0} ?".format(guess))
-    user_hint=input("Enter 'h' to indicate the guess is too high. Enter 'l' to indicate the guess is too low.Enter 'c' to indicate I guessed correctly.")
+    user_hint=input("Enter 'h' to indicate the guess is too high. Enter 'l' to indicate the guess is too low."
+    "Enter 'c' to indicate I guessed correctly.")
     if user_hint=='h':
         #if it's too high, it's good new high ;)
         high=guess
