@@ -78,7 +78,9 @@ class RectangularRoom(object):
         """
         self.width=width
         self.height=height
-        
+        # a dico per instance of cleaned tiles
+        self.dico_cleaned={} 
+
     def cleanTileAtPosition(self, pos):
         """
         Mark the tile under the position POS as cleaned.
@@ -87,9 +89,8 @@ class RectangularRoom(object):
 
         pos: a Position
         """
-        dico_cleaned={}
         # if it's not cleaned it's not true...
-        dico_cleaned[pos]=True
+        self.dico_cleaned[(int(pos.getX()),int(pos.getY()))]=True
 
     def isTileCleaned(self, m, n):
         """
