@@ -83,11 +83,17 @@ class RectangularRoom(object):
 
         # Must I write that in __init__ or in cleanTileAtPosition?
         #should mark all the tiles as unclean first
+        #BUG: only same num tiles!!!
+        #WHAT ABOUT A TWO DIM ARRAY??
+        #room=[[i for i in self.width] for y in self.height]
+
+        #does not work!!
         x=y=0
-        while x < self.width and y < self.height:
-            self.dico_cleaned[(x,y)]="unclean"
+        while x < self.width:
+            while y < self.height:
+                self.dico_cleaned[(x,y)]="unclean"
+                y+=1
             x+=1
-            y+=1
 
     def cleanTileAtPosition(self, pos):
         """
@@ -129,7 +135,13 @@ class RectangularRoom(object):
 
         returns: an integer
         """
-        return len(self.dico_cleaned)
+        #using list.keys would be better here: iterate through the dict with the
+        #keys
+        listclean=list(self.dico_cleaned.values())
+        num=0
+        for v in listclean:
+            if v=="cleaned":num+=1
+        return num
 
     def getRandomPosition(self):
         """
