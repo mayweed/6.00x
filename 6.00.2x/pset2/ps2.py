@@ -84,16 +84,16 @@ class RectangularRoom(object):
         # Must I write that in __init__ or in cleanTileAtPosition?
         #should mark all the tiles as unclean first
         #BUG: only same num tiles!!!
-        #WHAT ABOUT A TWO DIM ARRAY??
+        #WHAT ABOUT A TWO DIM ARRAY?? With 0 as unclean and 1 as clean??
         #room=[[i for i in self.width] for y in self.height]
 
-        #does not work!!
         x=y=0
-        while x < self.width:
-            while y < self.height:
+        while y < self.height:
+            while x < self.width:
                 self.dico_cleaned[(x,y)]="unclean"
-                y+=1
-            x+=1
+                x+=1
+            x=0
+            y+=1
 
     def cleanTileAtPosition(self, pos):
         """
