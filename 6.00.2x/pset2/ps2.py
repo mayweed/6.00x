@@ -137,10 +137,9 @@ class RectangularRoom(object):
         """
         #using list.keys would be better here: iterate through the dict with the
         #keys
-        listclean=list(self.dico_cleaned.values())
         num=0
-        for v in listclean:
-            if v=="cleaned":num+=1
+        for v in list(self.dico_cleaned.keys()):
+            if self.dico_cleaned[v]=="cleaned":num+=1
         return num
 
     def getRandomPosition(self):
@@ -149,6 +148,7 @@ class RectangularRoom(object):
 
         returns: a Position object.
         """
+        #Should return a position object!!
         pos=(random.choice([0,self.width]),random.choice([0,self.height]))
         return pos
 
