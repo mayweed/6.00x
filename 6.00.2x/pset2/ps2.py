@@ -120,7 +120,7 @@ class RectangularRoom(object):
 
         returns: an integer
         """
-        raise NotImplementedError
+        return len(self.dico_cleaned)
 
     def getRandomPosition(self):
         """
@@ -137,8 +137,9 @@ class RectangularRoom(object):
         pos: a Position object.
         returns: True if pos is in the room, False otherwise.
         """
-        raise NotImplementedError
-
+        if pos.getX() > self.width or pos.getY() > self.height:
+            return False
+        else: return True
 
 class Robot(object):
     """
