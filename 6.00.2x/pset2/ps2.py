@@ -81,6 +81,14 @@ class RectangularRoom(object):
         # a dico per instance of cleaned tiles
         self.dico_cleaned={} 
 
+        # Must I write that in __init__ or in cleanTileAtPosition?
+        #should mark all the tiles as unclean first
+        x=y=0
+        while x < self.width and y < self.height:
+            self.dico_cleaned[(x,y)]="unclean"
+            x+=1
+            y+=1
+
     def cleanTileAtPosition(self, pos):
         """
         Mark the tile under the position POS as cleaned.
@@ -89,8 +97,9 @@ class RectangularRoom(object):
 
         pos: a Position
         """
-        # if it's not cleaned it's not true...
-        self.dico_cleaned[(int(pos.getX()),int(pos.getY()))]=True
+        
+        # then mark the tile as cleaned 
+        self.dico_cleaned[(int(pos.getX()),int(pos.getY()))]="cleaned"
 
     def isTileCleaned(self, m, n):
         """
@@ -103,7 +112,7 @@ class RectangularRoom(object):
         returns: True if (m, n) is cleaned, False otherwise
         """
     
-        if cleanTileAtPosition(m,n): return True
+        if self.dico_cleaned[(m,n)] == "cleaned": return True
         else: return False
 
     def getNumTiles(self):
@@ -128,7 +137,8 @@ class RectangularRoom(object):
 
         returns: a Position object.
         """
-        raise NotImplementedError
+        pos=(random.choice([0,self.width]),random.choice([0,self.height]))
+        return pos
 
     def isPositionInRoom(self, pos):
         """
@@ -138,7 +148,8 @@ class RectangularRoom(object):
         returns: True if pos is in the room, False otherwise.
         """
         if pos.getX() > self.width or pos.getY() > self.height:
-            return False
+            if  pos.getX() < self.width or pos.getY() < self.height:
+                return False
         else: return True
 
 class Robot(object):
