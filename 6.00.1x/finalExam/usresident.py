@@ -48,11 +48,11 @@ class USResident(Person):
         """
         self.name=name
         #Should use try...except here...
-        try:
-            assert((isinstance(status,str))and status in ["citizen","legal_resident","illegal_resident"]) 
-            self.status=status
-        except AssertionError as err:
-                raise ValueError("Wrong Status line 53")
+        if status not in ["citizen","legal_resident","illegal_resident"]: 
+            if not isinstance(status,str):
+                raise ValueError
+        else: self.status=status
+                #raise ValueError("Wrong Status line 53")
 
     def getStatus(self):
         """
@@ -63,5 +63,5 @@ class USResident(Person):
 #TESTING
 a = USResident('Tim Beaver', 'citizen')
 print (a.getStatus())
-b = USResident('Tim Horton', 5)#'non-resident')
+b = USResident('Tim Horton', 'non-resident')
 print(b.getStatus())
