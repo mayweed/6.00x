@@ -34,7 +34,8 @@ class Person(object):
     def __str__(self):
         #return self's name
         return self.name
-        
+
+# Got 7 out of ten, cant understand why...Nevermind...
 class USResident(Person):
     """ 
     A Person who resides in the US.
