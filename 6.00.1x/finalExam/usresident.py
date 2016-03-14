@@ -47,13 +47,10 @@ class USResident(Person):
         Raises a ValueError if status is not one of those 3 strings
         """
         self.name=name
-        #Should use try...except here...
-        if status not in ["citizen","legal_resident","illegal_resident"]: 
-            if not isinstance(status,str):
-                raise ValueError
-        else: self.status=status
-                #raise ValueError("Wrong Status line 53")
-
+        self.status=status
+        if status not in ["citizen","legal_resident","illegal_resident"] or not isinstance(status,str):
+            raise ValueError("Line 50")
+        
     def getStatus(self):
         """
         Returns the status
@@ -63,5 +60,5 @@ class USResident(Person):
 #TESTING
 a = USResident('Tim Beaver', 'citizen')
 print (a.getStatus())
-b = USResident('Tim Horton', 'non-resident')
+b = USResident('Tim Horton', 'blabla5')#'non-resident')
 print(b.getStatus())
