@@ -9,10 +9,13 @@ def getSublists(L, n):
     ListeOfSub=[]
     #ListeOfSub.append([x for x in L for y in range(n)])
     #use index + range with its 3 args!!
+    #ListeOfSub.append([L[i:i+n] for i in range(x,len(L),n)]) 
     x=0
     while x < len(L):
-        ListeOfSub.append([L[i:i+n] for i in range(x,len(L),n)]) 
+        ListeOfSub.append(L[x:x+n])
         x+=1
+        if x+n>len(L):break
     print(ListeOfSub)
             
-getSublists([1,2,3,4],2)
+#getSublists([1,2,3,4],2)
+getSublists([10, 4, 6, 8, 3, 4, 5, 7, 7, 2],4)
