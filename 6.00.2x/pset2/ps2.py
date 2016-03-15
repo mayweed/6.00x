@@ -184,6 +184,9 @@ class Robot(object):
         """
         self.room=room
         self.speed=speed
+        self.RobotPosition=room.getRandomPosition()
+        room.cleanTileAtPosition(RobotPosition)
+        self.Direction=random.choice(0,360)
 
     def getRobotPosition(self):
         """
@@ -191,8 +194,8 @@ class Robot(object):
 
         returns: a Position object giving the robot's position.
         """
-        initPosRobot=room.getRandomPosition()
-        return initPosRobot
+        pos=Position(RobotPosition.getX(),RobotPosition.getY())
+        return pos
 
     def getRobotDirection(self):
         """
@@ -201,7 +204,7 @@ class Robot(object):
         returns: an integer d giving the direction of the robot as an angle in
         degrees, 0 <= d < 360.
         """
-        return random.choice(0,360)
+        return self.Direction
 
     def setRobotPosition(self, position):
         """
@@ -209,7 +212,8 @@ class Robot(object):
 
         position: a Position object.
         """
-        raise NotImplementedError
+        #Should check that the new position is actually inside the room
+        return position.getNewPosition(self.getRobotDirection,self.speed)
 
     def setRobotDirection(self, direction):
         """
@@ -217,7 +221,13 @@ class Robot(object):
 
         direction: integer representing an angle in degrees
         """
-        raise NotImplementedError
+        if direction==360:
+            return random.choice(0,direction)
+
+        elif direction==0:
+            return random.choice(direction,360) 
+
+        else return random.choice(direction,360)
 
     def updatePositionAndClean(self):
         """
