@@ -50,7 +50,7 @@ class USResident(Person):
         self.name=name
         self.status=status
         if status not in ["citizen","legal_resident","illegal_resident"] or not isinstance(status,str):
-            raise ValueError("Line 50")
+            raise ValueError
         
     def getStatus(self):
         """
