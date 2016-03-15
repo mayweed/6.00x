@@ -149,7 +149,7 @@ class RectangularRoom(object):
         returns: a Position object.
         """
         #Should return a position object!!
-        pos=(random.choice([0,self.width]),random.choice([0,self.height]))
+        pos=Position(random.choice([0.5,self.width-0.5]),random.choice([0.5,self.height-0.5]))
         return pos
 
     def isPositionInRoom(self, pos):
@@ -159,8 +159,8 @@ class RectangularRoom(object):
         pos: a Position object.
         returns: True if pos is in the room, False otherwise.
         """
-        if pos.getX() > self.width or pos.getY() > self.height:
-            if  pos.getX() < self.width or pos.getY() < self.height:
+        if pos.getX() >= self.width or pos.getX() < 0 :
+            if  pos.getY() >= self.height or pos.getY() < 0:
                 return False
         else: return True
 
