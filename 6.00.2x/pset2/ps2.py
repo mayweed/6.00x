@@ -159,7 +159,7 @@ class RectangularRoom(object):
         pos: a Position object.
         returns: True if pos is in the room, False otherwise.
         """
-        if ((int(pos.getX()) < self.width and pos.getX() >= 0.0) and (int(pos.getY()) < self.height and pos.getY() >= 0.0)):
+        if (int(pos.getX()) < self.width and pos.getX() >= 0) and (int(pos.getY()) < self.height and pos.getY() >= 0):
             return True
         else: return False
 
