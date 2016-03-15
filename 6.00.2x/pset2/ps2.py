@@ -159,10 +159,9 @@ class RectangularRoom(object):
         pos: a Position object.
         returns: True if pos is in the room, False otherwise.
         """
-        if pos.getX() >= self.width or pos.getX() < 0 :
-            if  pos.getY() >= self.height or pos.getY() < 0:
-                return False
-        else: return True
+        if ((int(pos.getX()) < self.width and pos.getX() >= 0.0) and (int(pos.getY()) < self.height and pos.getY() >= 0.0)):
+            return True
+        else: return False
 
 class Robot(object):
     """
@@ -299,7 +298,7 @@ def showPlot1(title, x_label, y_label):
     times1 = []
     times2 = []
     for num_robots in num_robot_range:
-        print "Plotting", num_robots, "robots..."
+        print ("Plotting", num_robots, "robots...")
         times1.append(runSimulation(num_robots, 1.0, 20, 20, 0.8, 20, StandardRobot))
         times2.append(runSimulation(num_robots, 1.0, 20, 20, 0.8, 20, RandomWalkRobot))
     pylab.plot(num_robot_range, times1)
@@ -320,7 +319,7 @@ def showPlot2(title, x_label, y_label):
     times2 = []
     for width in [10, 20, 25, 50]:
         height = 300/width
-        print "Plotting cleaning time for a room of width:", width, "by height:", height
+        print ("Plotting cleaning time for a room of width:", width, "by height:", height)
         aspect_ratios.append(float(width) / height)
         times1.append(runSimulation(2, 1.0, width, height, 0.8, 200, StandardRobot))
         times2.append(runSimulation(2, 1.0, width, height, 0.8, 200, RandomWalkRobot))
