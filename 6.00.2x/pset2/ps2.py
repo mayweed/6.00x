@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # 6.00.2x Problem Set 2: Simulating robots
 
 import math
