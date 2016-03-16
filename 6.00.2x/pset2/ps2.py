@@ -250,9 +250,18 @@ class StandardRobot(Robot):
         Move the robot to a new position and mark the tile it is on as having
         been cleaned.
         """
+        #I cant get why I cannot access getNewPosition() through RobotPosition attribute!!
+        current_pos=self.getRobotPosition()
+        new_pos=current_pos.getNewPosition(self.Direction,self.speed)
+        if not self.room.isPositionInRoom(new_pos):
+                angle=self.setRobotDirection(random.choice([0,359]))
+                new_pos=current_pos.getNewPosition(angle,self.speed)
+        else:
+            self.setRobotPosition(new_pos)
+            self.room.cleanTileAtPosition(new_pos)
 
 # Uncomment this line to see your implementation of StandardRobot in action!
-##testRobotMovement(StandardRobot, RectangularRoom)
+testRobotMovement(StandardRobot, RectangularRoom)
 
 
 # === Problem 3
