@@ -227,7 +227,7 @@ class Robot(object):
         elif direction==0:
             return random.choice(direction,360) 
 
-        else return random.choice(direction,360)
+        else:return random.choice(direction,360)
 
     def updatePositionAndClean(self):
         """
