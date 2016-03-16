@@ -185,8 +185,8 @@ class Robot(object):
         self.room=room
         self.speed=speed
         self.RobotPosition=room.getRandomPosition()
-        room.cleanTileAtPosition(RobotPosition)
-        self.Direction=random.choice(0,360)
+        room.cleanTileAtPosition(self.RobotPosition)
+        self.Direction=random.choice([0,360])
 
     def getRobotPosition(self):
         """
@@ -222,12 +222,14 @@ class Robot(object):
         direction: integer representing an angle in degrees
         """
         if direction==360:
-            return random.choice(0,direction)
+            return random.choice([0,direction])
 
         elif direction==0:
-            return random.choice(direction,360) 
+            return random.choice([direction,360]) 
 
-        else:return random.choice(direction,360)
+        else:return random.choice([direction,360])
+        #here should update self.direction!! This a _setter_
+#Must set sth
 
     def updatePositionAndClean(self):
         """
