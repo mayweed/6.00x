@@ -150,7 +150,7 @@ class RectangularRoom(object):
         returns: a Position object.
         """
         #Should return a position object!!
-        pos=Position(random.choice([0.5,self.width-0.5]),random.choice([0.5,self.height-0.5]))
+        pos=Position(random.randrange(0,self.width-1),random.randrange(0,self.height-1))
         return pos
 
     def isPositionInRoom(self, pos):
@@ -187,7 +187,7 @@ class Robot(object):
         self.speed=speed
         self.RobotPosition=room.getRandomPosition()
         room.cleanTileAtPosition(self.RobotPosition)
-        self.Direction=random.choice([0,359])
+        self.Direction=random.randrange(0,359)
 
     def getRobotPosition(self):
         """
@@ -255,7 +255,7 @@ class StandardRobot(Robot):
         current_pos=self.getRobotPosition()
         new_pos=current_pos.getNewPosition(self.Direction,self.speed)
         if not self.room.isPositionInRoom(new_pos):
-                angle=self.setRobotDirection(random.choice([0,359]))
+                angle=self.setRobotDirection(random.randrange(0,359))
                 new_pos=current_pos.getNewPosition(angle,self.speed)
         else:
             self.setRobotPosition(new_pos)
