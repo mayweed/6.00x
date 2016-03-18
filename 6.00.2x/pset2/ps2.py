@@ -272,35 +272,30 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     robot_type: class of robot to be instantiated (e.g. StandardRobot or
                 RandomWalkRobot)
     """
-    #INITIAL VALUES
-    room=RectangularRoom(width,height)
-    
-    ListeRobot=[]
-    for i in range(num_robots-1):
-        #create and initialize pos the robots objects
-        rob=robot_type(room,speed)
-        ListeRobot[i].append(rob)
 
-    num_ticks=0
-    NumTicksByAttempt=[]
-    coverage=float(room.getNumCleanedTiles()/room.getNumTiles())
-    
-    # BEGIN SIMUL
-    for attempt in range(num_trials):    
+    for attempt in range(num_trials): 
+        room=RectangularRoom(width,height) 
+        
+        ListeRobot=[]
+        for i in range(num_robots-1):
+            #create and initialize pos the robots objects
+            rob=robot_type(room,speed)
+            rob.setPosition(room.getRandomPosition())
+            ListeRobot[i].append(rob)
+
+        num_ticks=0
+        NumTicksByAttempt=[]  
         #Let's see that
-        anim = ps2_visualize.RobotVisualization(num_robots, width, height)
-        #!! min_coverage is a float!!
-        cleaned_tiles=0
-        total_tiles=room.getNumTiles()
-        while coverage != min_coverage:
-            anim.update(room, ListeRobot)
+        #anim = ps2_visualize.RobotVisualization(num_robots, width, height)
+        while min_coverage > float(room.getNumCleanedTiles())/float(room.getNumTiles()):
+            #anim.update(room, ListeRobot)
             #Make them moving and cleaning
-            for rob in ListeRobot: 
-                rob.updatePositionAndClean()
+            for robot in ListeRobot: 
+                robot.updatePositionAndClean()
             num_ticks+=1
-            coverage=float(room.getNumCleanedTiles()/room.getNumTiles())
-        anim.done()
+        #anim.done()
         NumTicksByAttempt.append(num_ticks)
+        
     return(sum(NumTicksByAttempt)/num_trials)
     #print NumTicksByAttempt
 
