@@ -82,12 +82,6 @@ class RectangularRoom(object):
         # a dico per instance of cleaned tiles
         self.dico_cleaned={} 
 
-        # Must I write that in __init__ or in cleanTileAtPosition?
-        #should mark all the tiles as unclean first
-        #BUG: only same num tiles!!!
-        #WHAT ABOUT A TWO DIM ARRAY?? With 0 as unclean and 1 as clean??
-        #room=[[i for i in self.width] for y in self.height]
-
         x=y=0
         while y < self.height:
             while x < self.width:
@@ -104,8 +98,6 @@ class RectangularRoom(object):
 
         pos: a Position
         """
-        
-        # then mark the tile as cleaned 
         self.dico_cleaned[(int(pos.getX()),int(pos.getY()))]="cleaned"
 
     def isTileCleaned(self, m, n):
@@ -118,7 +110,6 @@ class RectangularRoom(object):
         n: an integer
         returns: True if (m, n) is cleaned, False otherwise
         """
-    
         if self.dico_cleaned[(m,n)] == "cleaned": return True
         else: return False
 
@@ -136,8 +127,6 @@ class RectangularRoom(object):
 
         returns: an integer
         """
-        #using list.keys would be better here: iterate through the dict with the
-        #keys
         num=0
         for v in list(self.dico_cleaned.keys()):
             if self.dico_cleaned[v]=="cleaned":num+=1
@@ -149,7 +138,6 @@ class RectangularRoom(object):
 
         returns: a Position object.
         """
-        #Should return a position object!!
         pos=Position(random.randrange(0,self.width-1),random.randrange(0,self.height-1))
         return pos
 
@@ -290,8 +278,7 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     ListeRobot=[]
     for i in range(num_robots):
         #create and initialize pos the robots objects
-        #rob=robot_type(room,speed)
-        rob=StandardRobot(room,speed)
+        rob=robot_type(room,speed)
         rob.setRobotPosition(room.getRandomPosition()) 
         ListeRob[i].append(rob)
 
@@ -300,19 +287,23 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
 
     # BEGIN SIMUL
     for attempt in range(num_trials):    
+
+        #Let's see that
+        anim = ps2_visualize.RobotVisualization(num_robots, width, height)
+
         while (room.getNumCleanedTiles()/room.getNumTiles()) != min_coverage:
+            anim.update(room, ListeRobot)
             #Make them moving and cleaning
             for rob in ListeRobot:
                 rob.updatePositionAndClean()
             num_ticks+=1
+            anim.done()
         NumTicksByAttempt.append(num_ticks)
-    #Let's see that
-    anim = ps2_visualize.RobotVisualization(num_robots, width, height)
-    print(NumTicksByAttempt)
-    #return num_ticks
+        #print(NumTicksByAttempt)
+    return min(NumTicksByAttempt)
 
 # Uncomment this line to see how much your simulation takes on average
-##print  runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot)
+print  runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot)
 
 
 # === Problem 4
