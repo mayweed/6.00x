@@ -250,7 +250,7 @@ class StandardRobot(Robot):
             self.room.cleanTileAtPosition(new_pos)
 
 # Uncomment this line to see your implementation of StandardRobot in action!
-testRobotMovement(StandardRobot, RectangularRoom)
+#testRobotMovement(StandardRobot, RectangularRoom)
 
 
 # === Problem 3
