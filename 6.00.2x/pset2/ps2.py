@@ -284,28 +284,32 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     robot_type: class of robot to be instantiated (e.g. StandardRobot or
                 RandomWalkRobot)
     """
-    #raise NotImplementedError
-    num_tile_cleaned=0
-    num_ticks=0
+    #INITIAL VALUES
     room=RectangularRoom(width,height)
-    num_total_tiles=room.getNumTiles()
+    
+    ListeRobot=[]
+    for i in range(num_robots):
+        #create and initialize pos the robots objects
+        #rob=robot_type(room,speed)
+        rob=StandardRobot(room,speed)
+        rob.setRobotPosition(room.getRandomPosition()) 
+        ListeRob[i].append(rob)
 
+    num_ticks=0
+    NumTicksByAttempt=[]
+
+    # BEGIN SIMUL
+    for attempt in range(num_trials):    
+        while (room.getNumCleanedTiles()/room.getNumTiles()) != min_coverage:
+            #Make them moving and cleaning
+            for rob in ListeRobot:
+                rob.updatePositionAndClean()
+            num_ticks+=1
+        NumTicksByAttempt.append(num_ticks)
     #Let's see that
     anim = ps2_visualize.RobotVisualization(num_robots, width, height)
-
-    for attempt in range(num_trials):
-        while num_tile_cleaned != num_total_tiles:
-            #The robots should move simultaneously HOW?
-            for i in range(num_robots):
-                #create the robots objects
-                rob=robot_type()
-                #Place them on the grid
-                rob.setRobotPosition(room.getRandomPosition()) 
-                #Make them moving and cleaning
-                rob.updatePositionAndClean()
-                #update tile_cleaned and num_ticks
-            num_tile_cleaned+=1
-            num_ticks+=1
+    print(NumTicksByAttempt)
+    #return num_ticks
 
 # Uncomment this line to see how much your simulation takes on average
 ##print  runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot)
