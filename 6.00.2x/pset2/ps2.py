@@ -276,31 +276,33 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     room=RectangularRoom(width,height)
     
     ListeRobot=[]
-    for i in range(num_robots):
+    for i in range(num_robots-1):
         #create and initialize pos the robots objects
         rob=robot_type(room,speed)
-        rob.setRobotPosition(room.getRandomPosition()) 
-        ListeRob[i].append(rob)
+        ListeRobot[i].append(rob)
 
     num_ticks=0
     NumTicksByAttempt=[]
-
+    coverage=float(room.getNumCleanedTiles()/room.getNumTiles())
+    
     # BEGIN SIMUL
     for attempt in range(num_trials):    
-
         #Let's see that
         anim = ps2_visualize.RobotVisualization(num_robots, width, height)
-
-        while (room.getNumCleanedTiles()/room.getNumTiles()) != min_coverage:
+        #!! min_coverage is a float!!
+        cleaned_tiles=0
+        total_tiles=room.getNumTiles()
+        while coverage != min_coverage:
             anim.update(room, ListeRobot)
             #Make them moving and cleaning
-            for rob in ListeRobot:
+            for rob in ListeRobot: 
                 rob.updatePositionAndClean()
             num_ticks+=1
-            anim.done()
+            coverage=float(room.getNumCleanedTiles()/room.getNumTiles())
+        anim.done()
         NumTicksByAttempt.append(num_ticks)
-        #print(NumTicksByAttempt)
-    return min(NumTicksByAttempt)
+    return(sum(NumTicksByAttempt)/num_trials)
+    #print NumTicksByAttempt
 
 # Uncomment this line to see how much your simulation takes on average
 print  runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot)
