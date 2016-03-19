@@ -274,7 +274,8 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot)
     """
     #To have the results for all my simul, should not put that in the loop!!
-    NumTicksByAttempt=[] 
+    NumTicksByAttempt=[]
+    
     for attempt in range(num_trials): 
         # RectangularRoom object with the given width/height
         room=RectangularRoom(width,height) 
@@ -289,7 +290,7 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
         #Let's see that
         #anim = ps2_visualize.RobotVisualization(num_robots, width, height)
         
-        while float(room.getNumCleanedTiles())/float(room.getNumTiles()) <= min_coverage:
+        while float(room.getNumCleanedTiles()/room.getNumTiles()) <= min_coverage:
             #anim.update(room, ListeRobot)
             #Make them moving and cleaning
             for robot in ListeRobot: 
@@ -301,8 +302,7 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     #anim.done() 
     return float(sum(NumTicksByAttempt)/num_trials)
 
-# Uncomment this line to see how much your simulation takes on average
-print  runSimulation(2, 2.0, 10, 10, 0.75, 30, StandardRobot)
+
 
 
 # === Problem 4
@@ -318,8 +318,20 @@ class RandomWalkRobot(Robot):
         Move the robot to a new position and mark the tile it is on as having
         been cleaned.
         """
-        raise NotImplementedError
+        current_pos=self.getRobotPosition()
 
+        angle=self.setRobotDirection(random.randrange(0,359))
+        new_pos=current_pos.getNewPosition(angle,self.speed)
+
+        if not self.room.isPositionInRoom(new_pos):
+                angle=self.setRobotDirection(random.randrange(0,359))
+                new_pos=current_pos.getNewPosition(angle,self.speed)
+        else:
+            self.setRobotPosition(new_pos)
+            self.room.cleanTileAtPosition(new_pos)
+
+# Uncomment this line to see how much your simulation takes on average
+print  runSimulation(2, 2.0, 10, 10, 0.75, 30, RandomWalkRobot)
 
 def showPlot1(title, x_label, y_label):
     """
