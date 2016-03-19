@@ -129,7 +129,7 @@ class RectangularRoom(object):
         """
         num=0
         for v in list(self.dico_cleaned.keys()):
-            if self.dico_cleaned[v]=="cleaned":num+=1
+            if self.dico_cleaned.get(v)=="cleaned":num+=1
         return num
 
     def getRandomPosition(self):
@@ -271,36 +271,37 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     num_trials: an int (num_trials > 0)
     robot_type: class of robot to be instantiated (e.g. StandardRobot or
                 RandomWalkRobot)
+    runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot)
     """
 
     for attempt in range(num_trials): 
         room=RectangularRoom(width,height) 
         
         ListeRobot=[]
-        for i in range(num_robots-1):
-            #create and initialize pos the robots objects
-            rob=robot_type(room,speed)
-            rob.setPosition(room.getRandomPosition())
-            ListeRobot[i].append(rob)
+        for i in range(num_robots):
+            #create and initialize pos the robots objects           
+            ListeRobot.append(robot_type(room,speed))
 
         num_ticks=0
         NumTicksByAttempt=[]  
         #Let's see that
         #anim = ps2_visualize.RobotVisualization(num_robots, width, height)
-        while min_coverage > float(room.getNumCleanedTiles())/float(room.getNumTiles()):
+        
+        while min_coverage < float(room.getNumCleanedTiles())/float(room.getNumTiles()):
             #anim.update(room, ListeRobot)
             #Make them moving and cleaning
             for robot in ListeRobot: 
                 robot.updatePositionAndClean()
             num_ticks+=1
-        #anim.done()
-        NumTicksByAttempt.append(num_ticks)
+            print(num_ticks)
+            #anim.done()
+            NumTicksByAttempt.append(num_ticks)
         
-    return(sum(NumTicksByAttempt)/num_trials)
-    #print NumTicksByAttempt
+    #return(sum(NumTicksByAttempt)/num_trials)
+    print NumTicksByAttempt
 
 # Uncomment this line to see how much your simulation takes on average
-print  runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot)
+print  runSimulation(2, 1.0, 10, 10, 0.75, 30, StandardRobot)
 
 
 # === Problem 4
