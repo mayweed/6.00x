@@ -289,7 +289,7 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
         #Let's see that
         #anim = ps2_visualize.RobotVisualization(num_robots, width, height)
         
-        while min_coverage >= float(room.getNumCleanedTiles())/float(room.getNumTiles()):
+        while float(room.getNumCleanedTiles())/float(room.getNumTiles()) <= min_coverage:
             #anim.update(room, ListeRobot)
             #Make them moving and cleaning
             for robot in ListeRobot: 
@@ -297,13 +297,12 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
             num_ticks+=1
             
         NumTicksByAttempt.append(num_ticks)
-        #anim.done()   
-
-    #print(NumTicksByAttempt)
+          
+    #anim.done() 
     return float(sum(NumTicksByAttempt)/num_trials)
 
 # Uncomment this line to see how much your simulation takes on average
-print  runSimulation(1, 1.0, 10, 10, 0.90, 30, StandardRobot)
+print  runSimulation(2, 2.0, 10, 10, 0.75, 30, StandardRobot)
 
 
 # === Problem 4
