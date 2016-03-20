@@ -331,11 +331,13 @@ class RandomWalkRobot(Robot):
             self.room.cleanTileAtPosition(new_pos)
 
 # Uncomment this line to see how much your simulation takes on average
-print  runSimulation(2, 2.0, 10, 10, 0.75, 30, RandomWalkRobot)
+#print  runSimulation(2, 2.0, 10, 10, 0.75, 30, RandomWalkRobot)
 
 def showPlot1(title, x_label, y_label):
     """
     What information does the plot produced by this function tell you?
+    def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
+                  robot_type):
     """
     num_robot_range = range(1, 11)
     times1 = []
@@ -382,10 +384,12 @@ def showPlot2(title, x_label, y_label):
 #
 #       (... your call here ...)
 #
+#showPlot1(title="Time it takes to 1-10 robots to clean 80% of a room", x_label="Number of robots", y_label="Time-steps")
 
 #
 # 2) Write a function call to showPlot2 that generates an appropriately-labeled
 #     plot.
 #
 #       (... your call here ...)
-#
+#showPlot2(title="Time it takes two robots to clean 80% of variously shaped rooms", x_label="Aspect Ratio", y_label="Time-Steps")
+
