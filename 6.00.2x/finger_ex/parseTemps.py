@@ -27,6 +27,8 @@ def producePlot(highTemps,lowTemps):
     while count < len(highTemps):
         diffTemps.append(highTemps[count]-lowTemps[count])
         count+=1
+    # with numpy: diffTemps = list(np.array(highTemps) - np.array(lowTemps))
+    # very nice!!! should learn numpy a bit ^^
     pylab.plot(range(1,32),diffTemps)
     pylab.title('Day by Day Ranges in Temperature in Boston in July 2012')
     pylab.xlabel('Days')
