@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import pylab
+
 fileTemps='julyTemps.txt'
 
 def parseTemps(fileTemps):
@@ -19,4 +21,17 @@ def parseTemps(fileTemps):
         # A tuple of the two lists!!
         return(highTemps,lowTemps)
             
-parseTemps(fileTemps)        
+def producePlot(highTemps,lowTemps):
+    diffTemps=[]
+    count=0
+    while count < len(highTemps):
+        diffTemps.append(highTemps[count]-lowTemps[count])
+        count+=1
+    pylab.plot(range(1,32),diffTemps)
+    pylab.title('Day by Day Ranges in Temperature in Boston in July 2012')
+    pylab.xlabel('Days')
+    pylab.ylabel('Temperature Ranges')
+    pylab.show()
+
+high,low=parseTemps(fileTemps)
+producePlot(high,low)
