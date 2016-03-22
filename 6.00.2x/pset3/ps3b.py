@@ -80,8 +80,11 @@ class SimpleVirus(object):
         NoChildException if this virus particle does not reproduce.               
         """
 
-        # TODO
-
+        offspring=SimpleVirus()
+        if prob=self.maxBirthProb * (1 - popDensity):
+            return offspring
+        else: 
+            raise NoChildException
 
 
 class Patient(object):
