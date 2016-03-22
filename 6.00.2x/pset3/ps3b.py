@@ -56,8 +56,8 @@ class SimpleVirus(object):
         returns: True with probability self.getClearProb and otherwise returns
         False.
         """
-
-        if self.getClearProb:return True
+        stochNum=random.random()
+        if self.getClearProb==StochNum:return True
         else:return False
     
     def reproduce(self, popDensity):
