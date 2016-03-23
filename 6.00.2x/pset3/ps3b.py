@@ -57,7 +57,7 @@ class SimpleVirus(object):
         False.
         """
         stochNum=random.random()
-        if self.getClearProb==StochNum:return True
+        if self.getClearProb==stochNum:return True
         else:return False
     
     def reproduce(self, popDensity):
@@ -80,9 +80,9 @@ class SimpleVirus(object):
         NoChildException if this virus particle does not reproduce.               
         """
 
-        offspring=SimpleVirus()
+        offspring=SimpleVirus(self.maxBirthProb,self.clearProb)
         prob=random.random()
-        if prob=self.maxBirthProb * (1 - popDensity):
+        if prob==self.maxBirthProb * (1 - popDensity):
             return offspring
         else: 
             raise NoChildException
@@ -156,6 +156,8 @@ class Patient(object):
         for v in self.getViruses():
             try:
                 updatedList.append(v.reproduce(popDensity))
+            # You should never use bare `except` clauses in your code.
+            # dixit Grader...
             except:
                 continue
 
