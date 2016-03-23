@@ -155,12 +155,7 @@ class Patient(object):
 
         popDensity= self.getTotalPop()
         for v in self.getViruses():
-            try:
-                updatedList.append(v.reproduce(popDensity))
-            # You should never use bare `except` clauses in your code.
-            # dixit Grader...
-            except:
-                continue
+            updatedList.append(v.reproduce(popDensity))
 
         # the list updated with the viruses still dont clear and the
         # eventual offsprings
