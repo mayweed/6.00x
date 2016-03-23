@@ -57,7 +57,7 @@ class SimpleVirus(object):
         False.
         """
         stochNum=random.random()
-        if self.getClearProb==stochNum:return True
+        if stochNum<self.getClearProb:return True
         else:return False
     
     def reproduce(self, popDensity):
@@ -82,7 +82,7 @@ class SimpleVirus(object):
 
         offspring=SimpleVirus(self.maxBirthProb,self.clearProb)
         prob=random.random()
-        if prob==self.maxBirthProb * (1 - popDensity):
+        if prob<self.maxBirthProb * (1 - popDensity):
             return offspring
         else: 
             raise NoChildException
