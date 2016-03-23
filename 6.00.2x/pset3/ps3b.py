@@ -81,6 +81,7 @@ class SimpleVirus(object):
         """
 
         offspring=SimpleVirus()
+        prob=random.random()
         if prob=self.maxBirthProb * (1 - popDensity):
             return offspring
         else: 
@@ -145,10 +146,24 @@ class Patient(object):
         integer)
         """
 
-        # TODO
+        updatedList=[]
+        for v in self.getViruses():
+            if v.doesClear():continue
+            else:updatedList.append(v)
+        self.viruses=updatedList
 
+        popDensity= self.getTotalPop()
+        for v in self.getViruses():
+            try:
+                updatedList.append(v.reproduce(popDensity))
+            except:
+                continue
 
+        # the list updated with the viruses still dont clear and the
+        # eventual offsprings
+        self.viruses=updatedList
 
+        return self.getTotalPop()
 #
 # PROBLEM 3
 #
