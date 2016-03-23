@@ -57,6 +57,7 @@ class SimpleVirus(object):
         False.
         """
         stochNum=random.random()
+        if self.getClearProb==0:return False
         if stochNum<self.getClearProb:return True
         else:return False
     
