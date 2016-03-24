@@ -56,9 +56,7 @@ class SimpleVirus(object):
         returns: True with probability self.getClearProb and otherwise returns
         False.
         """
-        stochNum=random.random()
-        if self.getClearProb==0:return False
-        if stochNum<self.getClearProb:return True
+        if random.random()<self.clearProb():return True
         else:return False
     
     def reproduce(self, popDensity):
@@ -81,10 +79,8 @@ class SimpleVirus(object):
         NoChildException if this virus particle does not reproduce.               
         """
 
-        offspring=SimpleVirus(self.maxBirthProb,self.clearProb)
-        prob=random.random()
-        if prob<self.maxBirthProb * (1 - popDensity):
-            return offspring
+        if random.random()<self.maxBirthProb * (1 - popDensity):
+            return SimpleVirus(self.maxBirthProb,self.clearProb)
         else: 
             raise NoChildException
 
@@ -149,19 +145,26 @@ class Patient(object):
 
         updatedList=[]
         for v in self.getViruses():
-            if v.doesClear():continue
-            else:updatedList.append(v)
+            if not v.doesClear():
+                updatedList.append(v)
         self.viruses=updatedList
 
-        popDensity= self.getTotalPop()
-        for v in self.getViruses():
-            updatedList.append(v.reproduce(popDensity))
+        # popDensity: the population density (a float), defined as the current
+        #virus population divided by the maximum population.
+        popDensity= float(len(self.viruses) / self.maxPop)
+        
+        for v in self.viruses:
+            #"Based on pop density" what does that mean??
+            if popDensity>0:
+                updatedList.append(v.reproduce(popDensity))
+            else:
+                raise NoChildException
 
         # the list updated with the viruses still dont clear and the
         # eventual offsprings
         self.viruses=updatedList
-
-        return self.getTotalPop()
+        
+        return len(self.viruses)
 #
 # PROBLEM 3
 #
