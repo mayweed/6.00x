@@ -142,21 +142,21 @@ class Patient(object):
         returns: The total virus population at the end of the update (an
         integer)
         """
+        # popDensity: the population density (a float), defined as the current
+        #virus population divided by the maximum population.
+        popDensity= float(self.getTotalPop() / self.maxPop)
 
         updatedList=[]
         for v in self.viruses:
-            if not v.doesClear():
-                updatedList.append(v)
-
-        # popDensity: the population density (a float), defined as the current
-        #virus population divided by the maximum population.
-        popDensity= float(len(updatedList) / self.maxPop)
-        
-        for v in updatedList:
-            try:
-                updatedList.append(v.reproduce(popDensity))
-            except NoChildException:
+            if v.doesClear():
+                #virus cleared
                 pass
+            else: 
+                updatedList.append(v)
+                try:
+                    updatedList.append(v.reproduce(popDensity))
+                except NoChildException:
+                    pass
 
         # the list updated with the viruses still dont clear and the
         # eventual offsprings
