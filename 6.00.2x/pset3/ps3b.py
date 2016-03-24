@@ -146,6 +146,8 @@ class Patient(object):
         #virus population divided by the maximum population.
         popDensity= float(self.getTotalPop() / self.maxPop)
 
+        # Be very wary about mutating an object while iterating over its elements.
+        # Lesson to be remembered here: it's true even if it's an helper (like my updatedlist!)
         updatedList=[]
         for v in self.viruses:
             if v.doesClear():
