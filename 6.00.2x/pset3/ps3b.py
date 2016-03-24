@@ -153,12 +153,10 @@ class Patient(object):
         popDensity= float(len(updatedList) / self.maxPop)
         
         for v in updatedList:
-            #"Based on pop density" what does that mean??
-            if popDensity>0:
-                try:
-                    updatedList.append(v.reproduce(popDensity))
-                except NoChildException:
-                    pass
+            try:
+                updatedList.append(v.reproduce(popDensity))
+            except NoChildException:
+                pass
 
         # the list updated with the viruses still dont clear and the
         # eventual offsprings
