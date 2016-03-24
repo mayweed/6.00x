@@ -53,10 +53,10 @@ class SimpleVirus(object):
     def doesClear(self):
         """ Stochastically determines whether this virus particle is cleared from the
         patient's body at a time step. 
-        returns: True with probability self.getClearProb and otherwise returns
+        returns: True with probability self.clearProb and otherwise returns
         False.
         """
-        if random.random()<self.clearProb():return True
+        if random.random()<self.clearProb:return True
         else:return False
     
     def reproduce(self, popDensity):
@@ -79,7 +79,7 @@ class SimpleVirus(object):
         NoChildException if this virus particle does not reproduce.               
         """
 
-        if random.random()<self.maxBirthProb * (1 - popDensity):
+        if random.random()< (self.maxBirthProb * (1 - popDensity)):
             return SimpleVirus(self.maxBirthProb,self.clearProb)
         else: 
             raise NoChildException
@@ -144,26 +144,27 @@ class Patient(object):
         """
 
         updatedList=[]
-        for v in self.getViruses():
+        for v in self.viruses:
             if not v.doesClear():
                 updatedList.append(v)
-        self.viruses=updatedList
 
         # popDensity: the population density (a float), defined as the current
         #virus population divided by the maximum population.
-        popDensity= float(len(self.viruses) / self.maxPop)
+        popDensity= float(len(updatedList) / self.maxPop)
         
-        for v in self.viruses:
+        for v in updatedList:
             #"Based on pop density" what does that mean??
             if popDensity>0:
-                updatedList.append(v.reproduce(popDensity))
-            else:
-                raise NoChildException
+                try:
+                    updatedList.append(v.reproduce(popDensity))
+                except NoChildException:
+                    pass
 
         # the list updated with the viruses still dont clear and the
         # eventual offsprings
         self.viruses=updatedList
         
+        #self.viruses get updated, could return its new length
         return len(self.viruses)
 #
 # PROBLEM 3
