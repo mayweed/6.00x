@@ -3,6 +3,7 @@
 import numpy
 import random
 import pylab
+import datetime
 
 ''' 
 Begin helper code
@@ -184,10 +185,35 @@ def simulationWithoutDrug(numViruses, maxPop, maxBirthProb, clearProb,
     clearProb: Maximum clearance probability (a float between 0-1)
     numTrials: number of simulation runs to execute (an integer)
     """
+    trialsValues=[]
+    AvgGrowth=[]
+    count=0
+    for trial in range(numTrials):
+        starttime=datetime.datetime.now()
+        virusesL=[]
+        for num in range(numViruses):
+            virusesL.append(SimpleVirus(maxBirthProb,clearProb))
 
-    # TODO
+        p=Patient(virusesL,maxPop)
 
+        for timestep in range(300):
+            orig_pop=p.getTotalPop()
+            p.update()
+        #how many do I add during that trial??
+        trialsValues.append(p.getTotalPop()-orig_pop)
+        count+=300
+        #get news!!
+        print(trial,count)
+    stoptime=datetime.datetime.now()
+    deltaT=stoptime-starttime
+    #multiply by 1000 to get ms
+    print("Total time (for the impatient!!) = {0}".format(deltaT.total_seconds()))
 
+    #test
+    return trialsValues
+
+#TESTING PURPOSE
+#print (simulationWithoutDrug(100,1000,0.1,0.05,300))
 
 #
 # PROBLEM 4
