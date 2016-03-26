@@ -185,35 +185,36 @@ def simulationWithoutDrug(numViruses, maxPop, maxBirthProb, clearProb,
     clearProb: Maximum clearance probability (a float between 0-1)
     numTrials: number of simulation runs to execute (an integer)
     """
-    trialsValues=[]
-    AvgGrowth=[]
+    yAxis=[0]*300
     count=0
     for trial in range(numTrials):
-        starttime=datetime.datetime.now()
         virusesL=[]
         for num in range(numViruses):
             virusesL.append(SimpleVirus(maxBirthProb,clearProb))
 
         p=Patient(virusesL,maxPop)
-
+        
         for timestep in range(300):
-            orig_pop=p.getTotalPop()
-            p.update()
-        #how many do I add during that trial??
-        trialsValues.append(p.getTotalPop()-orig_pop)
-        count+=300
-        #get news!!
-        print(trial,count)
-    stoptime=datetime.datetime.now()
-    deltaT=stoptime-starttime
-    #multiply by 1000 to get ms
-    print("Total time (for the impatient!!) = {0}".format(deltaT.total_seconds()))
+            yAxis[timestep]+=p.update()
 
-    #test
-    return trialsValues
+        #get news!!
+        count+=300
+        print(trial,count)
+
+    #Avg things:each elt/num trials to got avg per ts
+    for x in range(len(yAxis)):
+        yAxis[x]=float(yAxis[x]/numTrials)
+
+    #Pylab
+    pylab.title("Simulation of average growth of Virus population per timestep")
+    pylab.xlabel("Timesteps")
+    pylab.ylabel("Virus population")
+    pylab.plot(range(300),yAxis)
+    pylab.legend()
+    pylab.show()
 
 #TESTING PURPOSE
-#print (simulationWithoutDrug(100,1000,0.1,0.05,300))
+#print (simulationWithoutDrug(100,1000,0.1,0.05,100))
 
 #
 # PROBLEM 4
@@ -241,20 +242,21 @@ class ResistantVirus(SimpleVirus):
         the probability of the offspring acquiring or losing resistance to a drug.
         """
 
-        # TODO
-
+        SimpleVirus.__init__(maxBirthProb,clearProb)
+        self.resistances=resistances
+        self.mutProb=mutProb
 
     def getResistances(self):
         """
         Returns the resistances for this virus.
         """
-        # TODO
+        return self.resistances
 
     def getMutProb(self):
         """
         Returns the mutation probability for this virus.
         """
-        # TODO
+        return self.mutProb
 
     def isResistantTo(self, drug):
         """
@@ -267,10 +269,10 @@ class ResistantVirus(SimpleVirus):
         returns: True if this virus instance is resistant to the drug, False
         otherwise.
         """
+        #do I really need the == check if value is bool??
+        if self.resistances.get(drug)==True: return True
+        else:return False
         
-        # TODO
-
-
     def reproduce(self, popDensity, activeDrugs):
         """
         Stochastically determines whether this virus particle reproduces at a
