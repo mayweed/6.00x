@@ -203,7 +203,7 @@ def simulationWithoutDrug(numViruses, maxPop, maxBirthProb, clearProb,
 
     #Avg things:each elt/num trials to got avg per ts
     for x in range(len(yAxis)):
-        yAxis[x]=float(yAxis[x]/numTrials)
+        yAxis[x]=float(yAxis[x])/float(numTrials)
 
     #Pylab
     pylab.title("Simulation of average growth of Virus population per timestep")
