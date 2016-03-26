@@ -145,7 +145,7 @@ class Patient(object):
         """
         # popDensity: the population density (a float), defined as the current
         #virus population divided by the maximum population.
-        popDensity= float(self.getTotalPop() / self.maxPop)
+        popDensity= float(self.getTotalPop()) / float(self.maxPop)
 
         # Be very wary about mutating an object while iterating over its elements.
         # Lesson to be remembered here: it's true even if it's an helper (like my updatedlist!)
