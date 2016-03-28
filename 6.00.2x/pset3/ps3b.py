@@ -318,9 +318,20 @@ class ResistantVirus(SimpleVirus):
         NoChildException if this virus particle does not reproduce.
         """
 
-        # TODO
-
+        if list(self.resistances.keys())==activeDrugs:
+            #get new resistances dict 
+            offspringRes={}
+            for k,v in self.resistances.items():
+                if random.random() < mutProb-1:
+                   offspringRes[k]=v 
             
+            if random.random() < self.maxBirthProb * (1 - popDensity)
+                return ResistantVirus(self.maxBirthProb, self.clearProb, offspringRes, self.mutProb)
+            else:
+                raise NoChildException
+        #Should raise that here also?
+        else:
+            raise NoChildException
 
 class TreatedPatient(Patient):
     """
@@ -339,9 +350,9 @@ class TreatedPatient(Patient):
 
         maxPop: The  maximum virus population for this patient (an integer)
         """
-
-        # TODO
-
+        self.viruses=viruses
+        self.maxPop=maxPop
+        self.drugs=[]
 
     def addPrescription(self, newDrug):
         """
@@ -353,9 +364,8 @@ class TreatedPatient(Patient):
 
         postcondition: The list of drugs being administered to a patient is updated
         """
-
-        # TODO
-
+        #if newDrug not in self.drugs:
+        return self.drugs.append(newDrug)
 
     def getPrescriptions(self):
         """
@@ -364,9 +374,7 @@ class TreatedPatient(Patient):
         returns: The list of drug names (strings) being administered to this
         patient.
         """
-
-        # TODO
-
+        return self.drugs
 
     def getResistPop(self, drugResist):
         """
