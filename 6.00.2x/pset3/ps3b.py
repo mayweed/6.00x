@@ -242,7 +242,7 @@ class ResistantVirus(SimpleVirus):
         the probability of the offspring acquiring or losing resistance to a drug.
         """
 
-        SimpleVirus.__init__(maxBirthProb,clearProb)
+        SimpleVirus.__init__(self,maxBirthProb,clearProb)
         self.resistances=resistances
         self.mutProb=mutProb
 
@@ -270,7 +270,7 @@ class ResistantVirus(SimpleVirus):
         otherwise.
         """
         #do I really need the == check if value is bool??
-        if self.resistances.get(drug)==True: return True
+        if self.resistances.get(drug): return True
         else:return False
         
     def reproduce(self, popDensity, activeDrugs):
@@ -317,21 +317,32 @@ class ResistantVirus(SimpleVirus):
         maxBirthProb and clearProb values as this virus. Raises a
         NoChildException if this virus particle does not reproduce.
         """
+        #Check if all drugs in active drugs are in self.resistances
+        for drugs in activeDrugs:
+                if self.resistances[drugs]==False:break
 
-        if list(self.resistances.keys())==activeDrugs:
-            #get new resistances dict 
-            offspringRes={}
-            for k,v in self.resistances.items():
-                if random.random() < mutProb-1:
-                   offspringRes[k]=v 
+        #get new resistances dict 
+        offspringRes={}
+        for k,v in self.resistances.items():
+            if random.random() < mutProb-1:
+               # ==> v has mutProb probability to switch!!
+               offspringRes[k]=v 
+               if offspringRes[k]==True and random.random()<mutProb:
+                    offspring[k]=False
+               elif offspringRes[k]==False and random.random()<mutProb:
+                    offspring[k]=True
             
-            if random.random() < self.maxBirthProb * (1 - popDensity)
-                return ResistantVirus(self.maxBirthProb, self.clearProb, offspringRes, self.mutProb)
-            else:
-                raise NoChildException
+        if random.random() < self.maxBirthProb * (1 - popDensity):
+            return ResistantVirus(self.maxBirthProb, self.clearProb, offspringRes, self.mutProb)
+        else:
+            raise NoChildException
         #Should raise that here also?
         else:
             raise NoChildException
+
+#TESTING
+#resistances={"v":True,"x":False}
+#vi=ResistantVirus(0.1,0.05,resistances,0.9)
 
 class TreatedPatient(Patient):
     """
