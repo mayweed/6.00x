@@ -364,9 +364,17 @@ class TreatedPatient(Patient):
 
         postcondition: The list of drugs being administered to a patient is updated
         """
-        #if newDrug not in self.drugs:
-        return self.drugs.append(newDrug)
+        #if new drug already prescribed: no effect
+        if newDrug not in self.drugs: pass
 
+        else:
+            #append the new drug to the list of prescribed drugs
+            self.drugs.append(newDrug)
+            #administer the drug
+            popDensity= float(len(self.viruses)) / float(self.maxPop)
+            for v in self.viruses:
+                if isinstance(v,ResistantVirus):v.reproduce(popDensity,self.maxPop)
+        
     def getPrescriptions(self):
         """
         Returns the drugs that are being administered to this patient.
