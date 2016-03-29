@@ -318,34 +318,23 @@ class ResistantVirus(SimpleVirus):
         NoChildException if this virus particle does not reproduce.
         """
         #Check if all drugs in active drugs are in self.resistances
-        resist=0
         for drugs in activeDrugs:
-                if self.resistances[drugs]:resist+=1 
+                if self.resistances.get(drugs):continue
+                #If the virus doesn't resist to _all_drugs, don't go further
+                else:
+                    raise NoChildException
 
-        #case when virus could reproduce
-        #get new resistances dict 
-        if resist==len(activeDrugs):
-            offspringRes={}
-            for k,v in self.resistances.items():
-                # offspring has mutProb-1 to inherit traits
-                if random.random() < mutProb-1:
-                    offspringRes[k]=v 
-                    # ==> v has mutProb probability to switch!!
-                    if offspringRes[k]==True and random.random()<mutProb:
-                        offspring[k]=False
-                    elif offspringRes[k]==False and random.random()<mutProb:
-                        offspring[k]=True
-        #If the virus doesn't resist to _all_drugs, don't go further
-        else:
-            raise NoChildException
-            
         if random.random() < self.maxBirthProb * (1 - popDensity):
-            return ResistantVirus(self.maxBirthProb, self.clearProb, offspringRes, self.mutProb)
+            for k in self.resistances:
+                # ==> v has mutProb probability to switch!!
+                if random.random()<self.mutProb:
+                    self.resistances[k]=not self.resistances[k]
+            return ResistantVirus(self.maxBirthProb, self.clearProb,self.resistances,self.mutProb)
         else:
             raise NoChildException
 
 #TESTING
-#resistances={"v":True,"x":False}
+#resistances={"drug1":True,"drug2":False}
 #vi=ResistantVirus(0.1,0.05,resistances,0.9)
 
 class TreatedPatient(Patient):
