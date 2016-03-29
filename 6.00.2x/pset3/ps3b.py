@@ -318,25 +318,29 @@ class ResistantVirus(SimpleVirus):
         NoChildException if this virus particle does not reproduce.
         """
         #Check if all drugs in active drugs are in self.resistances
+        resist=0
         for drugs in activeDrugs:
-                if self.resistances[drugs]==False:break
+                if self.resistances[drugs]:resist+=1 
 
+        #case when virus could reproduce
         #get new resistances dict 
-        offspringRes={}
-        for k,v in self.resistances.items():
-            if random.random() < mutProb-1:
-               # ==> v has mutProb probability to switch!!
-               offspringRes[k]=v 
-               if offspringRes[k]==True and random.random()<mutProb:
-                    offspring[k]=False
-               elif offspringRes[k]==False and random.random()<mutProb:
-                    offspring[k]=True
+        if resist==len(activeDrugs):
+            offspringRes={}
+            for k,v in self.resistances.items():
+                # offspring has mutProb-1 to inherit traits
+                if random.random() < mutProb-1:
+                    offspringRes[k]=v 
+                    # ==> v has mutProb probability to switch!!
+                    if offspringRes[k]==True and random.random()<mutProb:
+                        offspring[k]=False
+                    elif offspringRes[k]==False and random.random()<mutProb:
+                        offspring[k]=True
+        #If the virus doesn't resist to _all_drugs, don't go further
+        else:
+            raise NoChildException
             
         if random.random() < self.maxBirthProb * (1 - popDensity):
             return ResistantVirus(self.maxBirthProb, self.clearProb, offspringRes, self.mutProb)
-        else:
-            raise NoChildException
-        #Should raise that here also?
         else:
             raise NoChildException
 
