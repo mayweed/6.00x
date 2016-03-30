@@ -369,7 +369,7 @@ class TreatedPatient(Patient):
         postcondition: The list of drugs being administered to a patient is updated
         """
         #if new drug already prescribed: no effect
-        if newDrug not in self.drugs: pass
+        if newDrug in self.drugs: pass
 
         else:
             #append the new drug to the list of prescribed drugs
@@ -399,8 +399,12 @@ class TreatedPatient(Patient):
         returns: The population of viruses (an integer) with resistances to all
         drugs in the drugResist list.
         """
-
-        # TODO
+        pop=0
+        for v in self.viruses:
+            for d in drugResist:
+                if v.isResistantTo(r):pop+=1
+                else:break
+        return pop
 
 
     def update(self):
